@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
+import 'package:go_router/go_router.dart';
 
 class SigninPage extends StatelessWidget {
-   SigninPage({Key? key}) : super(key: key);
+  SigninPage({Key? key}) : super(key: key);
 
   final _formKey = GlobalKey<FormState>();
   final _username = TextEditingController();
@@ -17,85 +18,98 @@ class SigninPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-          
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            
-            Text("Hello!", 
+            Expanded(
+                child: Image.asset(
+              "assets/images/hiker-w.webp",
+              width: 400,
+            )),
+            const Text(
+              "Hello!",
               style: TextStyle(
                 fontSize: 50,
                 color: Color(0xFF5B8A72),
                 fontWeight: FontWeight.bold,
-              ),),
-            
-            SizedBox(height: 10,),
-
-            Text("Please login using your credentials.", 
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            const Text(
+              "Please login using your credentials.",
               style: TextStyle(
                 fontSize: 18,
                 color: Color(0xFF56776C),
-              ),),
-
-            SizedBox(height: 25,),
-
+              ),
+            ),
+            const SizedBox(
+              height: 25,
+            ),
             Form(
-              key: _formKey,
+                key: _formKey,
                 child: Column(
-              children: [
-                // USERNAME -------------------------
-                CustomInputField(
-                  width: 250,
-                  controller: _username, 
-                  hintText: "enter your username", 
-                  icon: Icon(Icons.person), 
-                  hiddenText: false), 
-                
-                SizedBox(height: 15),
-                
-                // PASSWORD --------------------------
-                CustomInputField(
-                  width: 250,
-                  controller: _password, 
-                  hintText: "enter your password", 
-                  icon: Icon(Icons.password), 
-                  hiddenText: true,
-                  ),
+                  children: [
+                    // USERNAME -------------------------
+                    CustomInputField(
+                        width: 300,
+                        controller: _username,
+                        hintText: "enter your username",
+                        icon: Icon(Icons.person),
+                        hiddenText: false),
 
-                  SizedBox(height: 20,),
-                  // FORM BUTTON
-                  CustomButton(
-                    width: 250,
-                    onPressed: (){
-                      // SING IN BUTTON FUNCTION HERE --------
-                      // -------------------------------------
-                    }, 
-                    buttonText: "Sign in",
+                    const SizedBox(height: 15),
+
+                    // PASSWORD --------------------------
+                    CustomInputField(
+                      width: 300,
+                      controller: _password,
+                      hintText: "enter your password",
+                      icon: Icon(Icons.password),
+                      hiddenText: true,
                     ),
-              ],
-            )),
 
-            SizedBox(height: 20,),
-            
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    // FORM BUTTON
+                    CustomButton(
+                      width: 300,
+                      onPressed: () {
+                        // SING IN BUTTON FUNCTION HERE --------
+                        // -------------------------------------
+                      },
+                      buttonText: "Sign in",
+                    ),
+                  ],
+                )),
+            const SizedBox(
+              height: 10,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("Not a member?", 
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Color(0xFF56776C),
-                ), 
-                ), 
-                
+                const Text(
+                  "Not a member?",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Color(0xFF56776C),
+                  ),
+                ),
+
                 // REGISTER BUTTON
                 CustomTextButton(
                   onPressed: () {
-                    // push to register page here -----------
-                }, 
-                text: "Register",
+                    context.push("/register");
+                  },
+                  text: "Register",
                 )
               ],
             ),
+            const SizedBox(
+              height: 50,
+            )
           ],
         )),
       ),
