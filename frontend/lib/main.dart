@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/pages/bottom_tabs.dart';
+import 'package:frontend/pages/home.dart';
+import 'package:frontend/pages/register.dart';
 import 'package:frontend/pages/signin.dart';
 
 void main() {
@@ -13,7 +16,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SigninPage()
+      home: TabScreen(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: Color.fromARGB(255, 245, 244, 239),
+
+      ),
     );
   }
 }

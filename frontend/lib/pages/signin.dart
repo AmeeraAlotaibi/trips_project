@@ -45,6 +45,7 @@ class SigninPage extends StatelessWidget {
               children: [
                 // USERNAME -------------------------
                 CustomInputField(
+                  width: 250,
                   controller: _username, 
                   hintText: "enter your username", 
                   icon: Icon(Icons.person), 
@@ -54,6 +55,7 @@ class SigninPage extends StatelessWidget {
                 
                 // PASSWORD --------------------------
                 CustomInputField(
+                  width: 250,
                   controller: _password, 
                   hintText: "enter your password", 
                   icon: Icon(Icons.password), 
@@ -63,6 +65,7 @@ class SigninPage extends StatelessWidget {
                   SizedBox(height: 20,),
                   // FORM BUTTON
                   CustomButton(
+                    width: 250,
                     onPressed: (){
                       // SING IN BUTTON FUNCTION HERE --------
                       // -------------------------------------
@@ -71,6 +74,28 @@ class SigninPage extends StatelessWidget {
                     ),
               ],
             )),
+
+            SizedBox(height: 20,),
+            
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Not a member?", 
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Color(0xFF56776C),
+                ), 
+                ), 
+                
+                // REGISTER BUTTON
+                CustomTextButton(
+                  onPressed: () {
+                    // push to register page here -----------
+                }, 
+                text: "Register",
+                )
+              ],
+            ),
           ],
         )),
       ),
