@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
   }
 
   final _router = GoRouter(
-    initialLocation: "/home",
+    initialLocation: "/signin",
     routes: [
       GoRoute(path: "/home", builder: (context, state) => TabScreen()),
       GoRoute(path: "/signin", builder: (context, state) => SigninPage()),

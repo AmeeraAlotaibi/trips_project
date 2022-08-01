@@ -79,6 +79,7 @@ class SigninPage extends StatelessWidget {
                       onPressed: () {
                         // SING IN BUTTON FUNCTION HERE --------
                         // -------------------------------------
+                        context.push("/home");
                       },
                       buttonText: "Sign in",
                     ),
