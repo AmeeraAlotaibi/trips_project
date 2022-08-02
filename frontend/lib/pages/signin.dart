@@ -92,10 +92,10 @@ class SigninPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text(
-                  "Not a member?",
+                  "Not a Member?",
                   style: TextStyle(
                     fontSize: 18,
-                    color: Color(0xFF56776C),
+                    color: Color(0xFF2a3f34),
                   ),
                 ),
 

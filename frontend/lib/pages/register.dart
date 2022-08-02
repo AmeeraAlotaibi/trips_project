@@ -17,6 +17,11 @@ class RegisterPage extends StatelessWidget {
     return Scaffold(
       // APP BAR ------------------------------------------------------
       appBar: AppBar(
+        title: Text("Register", style: TextStyle(
+          color: Color(0xFF5B8A72),
+          fontSize: 26,
+        ),),
+        centerTitle: true,
       backgroundColor: Color.fromARGB(255, 245, 244, 239),
       elevation: 0,
       iconTheme: IconThemeData(
@@ -32,17 +37,10 @@ class RegisterPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              "Register",
-              style: TextStyle(
-                fontSize: 50,
-                color: Color(0xFF5B8A72),
-                fontWeight: FontWeight.bold,
+            Expanded(
+              child: Image.asset("assets/images/hiking.webp", width: 400,),
               ),
-            ),
-
-            const SizedBox(height: 10,),
-            
+        
             const Text("Please fill in the required fields", 
               style: TextStyle(
                 fontSize: 18,
@@ -115,6 +113,8 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ],
                 )),
+
+                SizedBox(height: 50,)
           ],
         )),
       ),

@@ -32,11 +32,24 @@ class _TabScreenState extends State<TabScreen> {
       // APPBAR ------------------------------------
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: Color(0xFF5B8A72),
+          color: Color(0xFF2a3f34),
           size: 30,
         ),
         elevation: 0,
         backgroundColor: Color.fromARGB(255, 245, 244, 239),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              // LOGOUT FUNCTION HERE --------------
+              
+              context.pop();
+            },
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 15),
+              child: Icon(Icons.logout),
+            ),
+          )
+        ],
       ),
 
       // NAVIGATION ------------------------------------------
@@ -47,10 +60,10 @@ class _TabScreenState extends State<TabScreen> {
           iconSize: 30,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          selectedIconTheme: IconThemeData(
+          selectedIconTheme: const IconThemeData(
             color: Color.fromARGB(255, 245, 244, 239),
           ),
-          // bottom navigation bar logic
+          // bottom navigation bar items
           currentIndex: _selectedIndex,
           onTap: _onTapped,
           items: const [
@@ -67,75 +80,7 @@ class _TabScreenState extends State<TabScreen> {
               label: "Profile",
             ),
           ]),
-
-      // DRAWER --------------------------------------------------
-      drawer: Drawer(
-          backgroundColor: Color.fromARGB(255, 245, 244, 239),
-          child: SafeArea(
-            child: ListView(
-              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-              children: [
-                DrawerHeader(
-                    child: Row(
-                  children: [
-                    // add image here later per user
-                    CircleAvatar(
-                      backgroundColor: Color(0xFF2a3f34),
-                      radius: 40,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Hello,",
-                          style: TextStyle(
-                            fontSize: 18,
-                          ),
-                        ),
-                        // add name of username here
-                        Text(
-                          "first name",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                )),
-
-                SizedBox(
-                  height: 50,
-                ),
-
-                // logout
-                ListTile(
-                  leading: Icon(
-                    Icons.logout,
-                    size: 30,
-                    color: Color(0xFF2a3f34),
-                  ),
-                  title: const Text(
-                    "Logout",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
-                      color: Color(0xFF2a3f34),
-                    ),
-                  ),
-                  onTap: () {
-                    context.go("/signin");
-                  },
-                ),
-              ],
-            ),
-          )),
-
+          
       body: _pages[_selectedIndex],
     );
   }

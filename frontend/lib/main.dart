@@ -3,10 +3,18 @@ import 'package:frontend/pages/bottom_tabs.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/register.dart';
 import 'package:frontend/pages/signin.dart';
+import 'package:frontend/providers/auth_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MultiProvider(providers: [
+      ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider(),),
+    ],
+    child: MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -32,7 +40,5 @@ class MyApp extends StatelessWidget {
       GoRoute(path: "/home", builder: (context, state) => TabScreen()),
       GoRoute(path: "/signin", builder: (context, state) => SigninPage()),
       GoRoute(path: "/register", builder: (context, state) => RegisterPage()),
-
-
     ]);
 }
