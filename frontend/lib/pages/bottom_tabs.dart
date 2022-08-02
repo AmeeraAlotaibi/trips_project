@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/pages/explore.dart';
 import 'package:frontend/pages/home.dart';
+import 'package:frontend/pages/profile.dart';
 import 'package:go_router/go_router.dart';
 
 class TabScreen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _TabScreenState extends State<TabScreen> {
   final List _pages = [
     HomePage(),
     ExplorePage(),
-    Icon(Icons.person),
+    ProfilePage(),
   ];
 
   void _onTapped(int index) {
@@ -37,7 +38,7 @@ class _TabScreenState extends State<TabScreen> {
           size: 30,
         ),
         elevation: 0,
-        backgroundColor: Color.fromARGB(255, 245, 244, 239),
+        backgroundColor: Colors.transparent,
         actions: [
           GestureDetector(
             onTap: () {

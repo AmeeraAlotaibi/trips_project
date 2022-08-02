@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/models/user.dart';
+import 'package:frontend/providers/auth_provider.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
+import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatelessWidget {
   RegisterPage({Key? key}) : super(key: key);
@@ -17,19 +21,22 @@ class RegisterPage extends StatelessWidget {
     return Scaffold(
       // APP BAR ------------------------------------------------------
       appBar: AppBar(
-        title: Text("Register", style: TextStyle(
-          color: Color(0xFF5B8A72),
-          fontSize: 26,
-        ),),
+        title: Text(
+          "Register",
+          style: TextStyle(
+            color: Color(0xFF5B8A72),
+            fontSize: 26,
+          ),
+        ),
         centerTitle: true,
-      backgroundColor: Color.fromARGB(255, 245, 244, 239),
-      elevation: 0,
-      iconTheme: IconThemeData(
-        color: Color(0xFF5B8A72),
-        size: 30,
+        backgroundColor: Color.fromARGB(255, 245, 244, 239),
+        elevation: 0,
+        iconTheme: IconThemeData(
+          color: Color(0xFF5B8A72),
+          size: 30,
+        ),
       ),
-    ),
-      
+
       // body ----------------------------------------------------------
       body: SafeArea(
         child: Center(
@@ -38,19 +45,21 @@ class RegisterPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Expanded(
-              child: Image.asset("assets/images/hiking.webp", width: 400,),
+              child: Image.asset(
+                "assets/images/hiking.webp",
+                width: 400,
               ),
-        
-            const Text("Please fill in the required fields", 
+            ),
+            const Text(
+              "Please fill in the required fields",
               style: TextStyle(
                 fontSize: 18,
                 color: Color(0xFF56776C),
-              ),),
-            
+              ),
+            ),
             const SizedBox(
               height: 25,
             ),
-
             Form(
                 key: _formKey,
                 child: Column(
@@ -61,24 +70,28 @@ class RegisterPage extends StatelessWidget {
                         // FIRST NAME -------------------
                         CustomInputField(
                           width: 145,
-                          controller: first_name, 
-                          hintText: "First Name", 
-                          hiddenText: false, 
-                          ),
+                          controller: first_name,
+                          hintText: "First Name",
+                          hiddenText: false,
+                        ),
 
-                          SizedBox(width: 10,),
-                        
+                        SizedBox(
+                          width: 10,
+                        ),
+
                         // LAST NAME -------------------
                         CustomInputField(
                           width: 145,
-                          controller: last_name, 
-                          hintText: "Last Name", 
-                          hiddenText: false, 
-                          )
+                          controller: last_name,
+                          hintText: "Last Name",
+                          hiddenText: false,
+                        )
                       ],
                     ),
 
-                    const SizedBox(height: 15,),
+                    const SizedBox(
+                      height: 15,
+                    ),
 
                     // USERNAME -------------------------
                     CustomInputField(
@@ -107,14 +120,22 @@ class RegisterPage extends StatelessWidget {
                       width: 300,
                       onPressed: () {
                         // REGISTRATION BUTTON FUNCTION HERE --------
-                        // -------------------------------------
+                        context.read<AuthProvider>().register(
+                              user: User(
+                                  firstName: first_name.text,
+                                  lastName: last_name.text,
+                                  username: _username.text,
+                                  password: _password.text),
+                            );
+                        context.push("/home");
                       },
                       buttonText: "Register",
                     ),
                   ],
                 )),
-
-                SizedBox(height: 50,)
+            SizedBox(
+              height: 50,
+            )
           ],
         )),
       ),
