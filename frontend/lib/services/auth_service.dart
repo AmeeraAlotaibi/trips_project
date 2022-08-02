@@ -13,7 +13,7 @@ class AuthService {
         data: user.toJson(),
       );
       print(res);
-      // token = res.data["token"];
+      token = res.data["access"];
     } on DioError catch (error) {
       print(error.message);
     }
@@ -30,7 +30,7 @@ class AuthService {
         data: user.toJson(),
       );
       print(res);
-      // token = res.data["token"];
+      token = res.data["access"];
     } on DioError catch (error) {
       print(error);
     }

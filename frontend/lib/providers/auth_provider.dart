@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/user.dart';
 import 'package:frontend/services/auth_service.dart';
+import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -26,5 +27,13 @@ class AuthProvider extends ChangeNotifier {
     token = "";
     print("Logged out");
     notifyListeners();
+  }
+
+  bool get isAuth {
+    if (token.isNotEmpty && Jwt.getExpiryDate(token)!.isAfter(DateTime.now())) {
+      user = User.fromJson(Jwt.parseJwt(token));
+      return true;
+    }
+    return false;
   }
 }
