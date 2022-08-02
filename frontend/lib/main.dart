@@ -8,13 +8,14 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider<AuthProvider>(create: (_) => AuthProvider(),),
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<AuthProvider>(
+        create: (_) => AuthProvider(),
+      ),
     ],
     child: MyApp(),
-    )
-  );
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,15 +31,17 @@ class MyApp extends StatelessWidget {
       routerDelegate: _router.routerDelegate,
       theme: ThemeData(
         scaffoldBackgroundColor: Color.fromARGB(255, 245, 244, 239),
+        // to change icon color theme when focused in text fields
+        colorScheme: ThemeData().colorScheme.copyWith(
+              primary: Color(0xFF5B8A72),
+            ),
       ),
     );
   }
 
-  final _router = GoRouter(
-    initialLocation: "/signin",
-    routes: [
-      GoRoute(path: "/home", builder: (context, state) => TabScreen()),
-      GoRoute(path: "/signin", builder: (context, state) => SigninPage()),
-      GoRoute(path: "/register", builder: (context, state) => RegisterPage()),
-    ]);
+  final _router = GoRouter(initialLocation: "/signin", routes: [
+    GoRoute(path: "/home", builder: (context, state) => TabScreen()),
+    GoRoute(path: "/signin", builder: (context, state) => SigninPage()),
+    GoRoute(path: "/register", builder: (context, state) => RegisterPage()),
+  ]);
 }

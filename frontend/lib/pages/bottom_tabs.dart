@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/pages/explore.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,7 +17,7 @@ class _TabScreenState extends State<TabScreen> {
   // pages of the bottom tabs ----------------
   final List _pages = [
     HomePage(),
-    Icon(Icons.explore),
+    ExplorePage(),
     Icon(Icons.person),
   ];
 
@@ -41,7 +42,7 @@ class _TabScreenState extends State<TabScreen> {
           GestureDetector(
             onTap: () {
               // LOGOUT FUNCTION HERE --------------
-              
+
               context.pop();
             },
             child: const Padding(
@@ -80,7 +81,7 @@ class _TabScreenState extends State<TabScreen> {
               label: "Profile",
             ),
           ]),
-          
+
       body: _pages[_selectedIndex],
     );
   }

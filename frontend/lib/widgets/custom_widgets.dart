@@ -32,6 +32,14 @@ class CustomInputField extends StatelessWidget {
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.black38),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2,
+              color: Color(0xFF5F7161),
+            ),
             borderRadius: BorderRadius.circular(5),
           ),
         ),
@@ -90,12 +98,11 @@ class CustomTextButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(text),
       style: TextButton.styleFrom(
-        primary: Color(0xFF56776C),
-        textStyle: TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-        )
-      ),
+          primary: Color(0xFF56776C),
+          textStyle: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          )),
     );
   }
 }
