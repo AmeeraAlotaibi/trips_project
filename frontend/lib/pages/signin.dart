@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/models/user.dart';
+import 'package:frontend/providers/auth_provider.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class SigninPage extends StatelessWidget {
   SigninPage({Key? key}) : super(key: key);
@@ -77,8 +80,11 @@ class SigninPage extends StatelessWidget {
                     CustomButton(
                       width: 300,
                       onPressed: () {
-                        // SING IN BUTTON FUNCTION HERE --------
-                        // -------------------------------------
+                        context.read<AuthProvider>().signin(
+                              user: User(
+                                  username: _username.text,
+                                  password: _password.text),
+                            );
                         context.push("/home");
                       },
                       buttonText: "Sign in",

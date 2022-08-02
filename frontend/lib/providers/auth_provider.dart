@@ -14,9 +14,9 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // sign in 
+  // sign in
   Future<void> signin({required User user}) async {
-    token = await AuthService().register(user: user);
+    token = await AuthService().signin(user: user);
     print("SIGNIN TOKEN::: ${token}");
     notifyListeners();
   }
