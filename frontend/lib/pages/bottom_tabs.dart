@@ -43,8 +43,7 @@ class _TabScreenState extends State<TabScreen> {
           GestureDetector(
             onTap: () {
               // LOGOUT FUNCTION HERE --------------
-
-              context.pop();
+              context.go("/signin");
             },
             child: const Padding(
               padding: EdgeInsets.symmetric(horizontal: 15),
