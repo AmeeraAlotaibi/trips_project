@@ -14,6 +14,7 @@ class Profile {
   String? date_joined;
   List<Trip>? trips;
 
+
   Profile({
     this.user,
     this.gender,
