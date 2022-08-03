@@ -7,15 +7,15 @@ class User {
   int? id;
   String username;
   String? password;
-  String? firstName;
-  String? lastName;
+  String? first_name;
+  String? last_name;
 
   User({
     this.id,
     required this.username,
     this.password,
-    this.firstName,
-    this.lastName,
+    this.first_name,
+    this.last_name,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

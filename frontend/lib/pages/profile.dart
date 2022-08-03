@@ -29,19 +29,41 @@ class ProfilePage extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          child: CircleAvatar(
-                            backgroundColor: Color(0xFF2a3f34),
-                            backgroundImage:
-                                AssetImage("assets/images/profile-image.png"),
+                        Stack(children: [
+                          Container(
+                            width: 125,
+                            height: 125,
+                            child: CircleAvatar(
+                              backgroundColor: Color(0xFF2a3f34),
+                              backgroundImage: NetworkImage(
+                                profile.profile.image == null
+                                    ? "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg"
+                                    : profile.profile.image.toString(),
+                              ),
+                            ),
                           ),
-                        ),
-
-                        // ClipOval(
-                        //   child: Image.network(""),
-                        // ),
+                          Positioned(
+                            bottom: 0,
+                            right: 10,
+                            child: InkWell(
+                              onTap: () {
+                                context.push("/edit-profile");
+                              },
+                              child: ClipOval(
+                                child: Container(
+                                  width: 30,
+                                  height: 30,
+                                  color: Color(0xFF5B8A72),
+                                  child: Icon(
+                                    Icons.edit,
+                                    size: 17,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ]),
 
                         const SizedBox(
                           height: 20,
@@ -52,7 +74,7 @@ class ProfilePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "${profile.profile.user?.firstName} ${profile.profile.user?.lastName}",
+                              "${profile.profile.user?.first_name} ${profile.profile.user?.last_name}",
                               style: TextStyle(
                                 fontSize: 18.5,
                                 color: Color(0xFF5F7161),
@@ -63,11 +85,8 @@ class ProfilePage extends StatelessWidget {
                             ),
                             // GENDER
 
-                            profile.profile.gender == "unknown"
-                                ? Icon(
-                                    Icons.question_mark,
-                                    color: Colors.pink[200],
-                                  )
+                            profile.profile.gender == ""
+                                ? Text("")
                                 : profile.profile.gender == "female"
                                     ? Icon(
                                         Icons.female,
@@ -139,7 +158,9 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "${profile.profile.trips?.length}",
+                                  profile.profile.trips?.length == null
+                                      ? "0"
+                                      : "${profile.profile.trips?.length}",
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Color(0xFF2a3f34),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/pages/bottom_tabs.dart';
+import 'package:frontend/pages/edit_profile.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/register.dart';
 import 'package:frontend/pages/signin.dart';
@@ -49,6 +50,8 @@ class MyApp extends StatelessWidget {
     GoRoute(path: "/register", builder: (context, state) => RegisterPage()),
     GoRoute(path: "/signin", builder: (context, state) => SigninPage()),
     GoRoute(path: "/user-lists", builder: (context, state) => UserListsPage()),
+    GoRoute(
+        path: "/edit-profile", builder: (context, state) => EditProfilePage()),
   ]);
 }
 
