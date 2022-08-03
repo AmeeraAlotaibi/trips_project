@@ -12,7 +12,7 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       birthDate: json['birthDate'] as String?,
       image: json['image'] as String?,
       bio: json['bio'] as String?,
-      dateJoined: json['dateJoined'] as String,
+      dateJoined: json['dateJoined'] as String?,
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{

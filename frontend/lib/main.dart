@@ -4,6 +4,7 @@ import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/register.dart';
 import 'package:frontend/pages/signin.dart';
 import 'package:frontend/providers/auth_provider.dart';
+import 'package:frontend/providers/trip_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,9 @@ void main() {
     providers: [
       ChangeNotifierProvider<AuthProvider>(
         create: (_) => AuthProvider(),
+      ),
+      ChangeNotifierProvider<TripProvider>(
+        create: (_) => TripProvider(),
       ),
     ],
     child: MyApp(),
@@ -30,10 +34,10 @@ class MyApp extends StatelessWidget {
       routeInformationProvider: _router.routeInformationProvider,
       routerDelegate: _router.routerDelegate,
       theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromARGB(255, 245, 244, 239),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 245, 244, 239),
         // to change icon color theme when focused in text fields
         colorScheme: ThemeData().colorScheme.copyWith(
-              primary: Color(0xFF5B8A72),
+              primary: const Color(0xFF5B8A72),
             ),
       ),
     );

@@ -5,12 +5,12 @@ part 'profile.g.dart';
 
 @JsonSerializable()
 class Profile {
-  User user;
+  User? user;
   String? gender;
   String? birthDate;
   String? image;
   String? bio;
-  String dateJoined;
+  String? dateJoined;
 
   Profile({
     required this.user,
