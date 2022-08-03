@@ -122,8 +122,8 @@ class RegisterPage extends StatelessWidget {
                         // REGISTRATION BUTTON FUNCTION HERE --------
                         context.read<AuthProvider>().register(
                               user: User(
-                                  firstName: first_name.text,
-                                  lastName: last_name.text,
+                                  first_name: first_name.text,
+                                  last_name: last_name.text,
                                   username: _username.text,
                                   password: _password.text),
                             );
