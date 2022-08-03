@@ -19,13 +19,11 @@ void main() {
       ChangeNotifierProvider<AuthProvider>(
         create: (_) => AuthProvider(),
       ),
-
       ChangeNotifierProvider<TripProvider>(
         create: (_) => TripProvider(),
-
+      ),
       ChangeNotifierProvider<ProfileProvider>(
         create: (_) => ProfileProvider(),
-
       ),
     ],
     child: MyApp(),
