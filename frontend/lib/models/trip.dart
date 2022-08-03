@@ -1,3 +1,4 @@
+import 'package:frontend/models/profile.dart';
 import 'package:frontend/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -6,14 +7,14 @@ part 'trip.g.dart';
 @JsonSerializable()
 class Trip {
   int? id;
-  User owner;
+  Profile? profile;
   String title;
   String description;
   String? image;
 
   Trip({
     this.id,
-    required this.owner,
+    required this.profile,
     required this.title,
     required this.description,
     required this.image,
