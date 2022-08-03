@@ -5,20 +5,20 @@ part 'profile.g.dart';
 
 @JsonSerializable()
 class Profile {
-  User user;
+  User? user;
   String? gender;
   String? birthDate;
   String? image;
   String? bio;
-  String dateJoined;
+  String? dateJoined;
 
   Profile({
-    required this.user,
+    this.user,
     this.gender,
     this.birthDate,
     this.image,
     this.bio,
-    required this.dateJoined,
+    this.dateJoined,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) =>

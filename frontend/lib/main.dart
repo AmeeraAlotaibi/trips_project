@@ -3,7 +3,9 @@ import 'package:frontend/pages/bottom_tabs.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/register.dart';
 import 'package:frontend/pages/signin.dart';
+import 'package:frontend/pages/user_trips_lists.dart';
 import 'package:frontend/providers/auth_provider.dart';
+import 'package:frontend/providers/profile_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +14,9 @@ void main() {
     providers: [
       ChangeNotifierProvider<AuthProvider>(
         create: (_) => AuthProvider(),
+      ),
+      ChangeNotifierProvider<ProfileProvider>(
+        create: (_) => ProfileProvider(),
       ),
     ],
     child: MyApp(),
@@ -41,8 +46,9 @@ class MyApp extends StatelessWidget {
 
   final _router = GoRouter(initialLocation: "/signin", routes: [
     GoRoute(path: "/home", builder: (context, state) => TabScreen()),
-    GoRoute(path: "/signin", builder: (context, state) => SigninPage()),
     GoRoute(path: "/register", builder: (context, state) => RegisterPage()),
+    GoRoute(path: "/signin", builder: (context, state) => SigninPage()),
+    GoRoute(path: "/user-lists", builder: (context, state) => UserListsPage()),
   ]);
 }
 
