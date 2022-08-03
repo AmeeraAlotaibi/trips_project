@@ -23,7 +23,6 @@ class ExplorePage extends StatelessWidget {
               );
             } else {
               return Consumer<TripProvider>(builder: (context, trips, child) {
-                print(trips.trips);
                 return ListView.builder(
                     itemCount: trips.trips.length,
                     itemBuilder: (context, index) =>
