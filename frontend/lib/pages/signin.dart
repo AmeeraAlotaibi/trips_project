@@ -85,10 +85,14 @@ class SigninPage extends StatelessWidget {
                                   username: _username.text,
                                   password: _password.text),
                             );
+
+                        context.go("/home");
+
                         if (Provider.of<AuthProvider>(context, listen: false)
                             .isAuth) {
                           context.go("/home");
                         }
+
                       },
                       buttonText: "Sign in",
                     ),

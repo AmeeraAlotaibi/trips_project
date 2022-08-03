@@ -1,8 +1,13 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/models/user.dart';
 import 'package:frontend/services/auth_service.dart';
+
+import 'package:frontend/services/client.dart';
+
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthProvider extends ChangeNotifier {
   late String token;
@@ -11,6 +16,7 @@ class AuthProvider extends ChangeNotifier {
   // register
   Future<void> register({required User user}) async {
     token = await AuthService().register(user: user);
+    await setToken(token);
     print("REGISTER TOKEN::: ${token}");
     notifyListeners();
   }
@@ -18,6 +24,7 @@ class AuthProvider extends ChangeNotifier {
   // sign in
   Future<void> signin({required User user}) async {
     token = await AuthService().signin(user: user);
+    await setToken(token);
     print("SIGNIN TOKEN::: ${token}");
     notifyListeners();
   }
@@ -29,11 +36,24 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+  Future<void> setToken(String token) async {
+    print("before ${token}");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    print("First: ${token}");
+    prefs.setString("token", token);
+    Client.dio.options.headers = {
+      HttpHeaders.authorizationHeader: 'Bearer $token',
+    };
+    print("last: ${token}");
+    notifyListeners();
+=======
   bool get isAuth {
     if (token.isNotEmpty && Jwt.getExpiryDate(token)!.isAfter(DateTime.now())) {
       user = User.fromJson(Jwt.parseJwt(token));
       return true;
     }
     return false;
+
   }
 }

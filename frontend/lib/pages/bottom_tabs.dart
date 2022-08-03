@@ -4,7 +4,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/pages/explore.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/profile.dart';
+import 'package:frontend/providers/auth_provider.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class TabScreen extends StatefulWidget {
   TabScreen({Key? key}) : super(key: key);
@@ -43,6 +45,10 @@ class _TabScreenState extends State<TabScreen> {
           GestureDetector(
             onTap: () {
               // LOGOUT FUNCTION HERE --------------
+
+              context.read<AuthProvider>().logout();
+=======
+
               context.go("/signin");
             },
             child: const Padding(
