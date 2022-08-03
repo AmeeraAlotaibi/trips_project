@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/providers/profile_provider.dart';
+import 'package:frontend/widgets/custom_widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
@@ -29,14 +30,19 @@ class ProfilePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          width: 125,
-                          height: 125,
+                          width: 100,
+                          height: 100,
                           child: CircleAvatar(
                             backgroundColor: Color(0xFF2a3f34),
                             backgroundImage:
                                 AssetImage("assets/images/profile-image.png"),
                           ),
                         ),
+
+                        // ClipOval(
+                        //   child: Image.network(""),
+                        // ),
+
                         const SizedBox(
                           height: 20,
                         ),
@@ -46,7 +52,7 @@ class ProfilePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "Ameera Alotaibi",
+                              "${profile.profile.user?.firstName} ${profile.profile.user?.lastName}",
                               style: TextStyle(
                                 fontSize: 18.5,
                                 color: Color(0xFF5F7161),
@@ -56,10 +62,21 @@ class ProfilePage extends StatelessWidget {
                               width: 8,
                             ),
                             // GENDER
-                            Icon(
-                              Icons.female,
-                              color: Colors.pink[200],
-                            ),
+
+                            profile.profile.gender == "unknown"
+                                ? Icon(
+                                    Icons.question_mark,
+                                    color: Colors.pink[200],
+                                  )
+                                : profile.profile.gender == "female"
+                                    ? Icon(
+                                        Icons.female,
+                                        color: Colors.pink[200],
+                                      )
+                                    : Icon(
+                                        Icons.male,
+                                        color: Colors.blue[200],
+                                      ),
                           ],
                         ),
 
@@ -75,9 +92,14 @@ class ProfilePage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+
+                        SizedBox(
+                          width: 15,
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
+
                         // dates -------------------------------------------------
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,7 +115,7 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "07-12-1999",
+                                  profile.profile.birth_date.toString(),
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF2a3f34),
@@ -117,7 +139,7 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "15",
+                                  "${profile.profile.trips?.length}",
                                   style: TextStyle(
                                     fontSize: 20,
                                     color: Color(0xFF2a3f34),
@@ -142,7 +164,7 @@ class ProfilePage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  "10-08-2022",
+                                  profile.profile.date_joined.toString(),
                                   style: TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF2a3f34),
@@ -174,7 +196,7 @@ class ProfilePage extends StatelessWidget {
                                 height: 5,
                               ),
                               Text(
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                                profile.profile.bio.toString(),
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
                                   fontSize: 15,
