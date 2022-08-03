@@ -18,7 +18,6 @@ class ExplorePage extends StatelessWidget {
           future: context.read<TripProvider>().getAllTrips(),
           builder: (context, dataSnapshot) {
             if (dataSnapshot.connectionState == ConnectionState.waiting) {
-              print("HERE Waiting");
               return const Center(
                 child: CircularProgressIndicator(),
               );
