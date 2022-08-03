@@ -36,7 +36,6 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   Future<void> setToken(String token) async {
     print("before ${token}");
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -47,13 +46,5 @@ class AuthProvider extends ChangeNotifier {
     };
     print("last: ${token}");
     notifyListeners();
-=======
-  bool get isAuth {
-    if (token.isNotEmpty && Jwt.getExpiryDate(token)!.isAfter(DateTime.now())) {
-      user = User.fromJson(Jwt.parseJwt(token));
-      return true;
-    }
-    return false;
-
   }
 }

@@ -47,8 +47,6 @@ class _TabScreenState extends State<TabScreen> {
               // LOGOUT FUNCTION HERE --------------
 
               context.read<AuthProvider>().logout();
-=======
-
               context.go("/signin");
             },
             child: const Padding(
