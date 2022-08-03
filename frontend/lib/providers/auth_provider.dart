@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:frontend/models/user.dart';
 import 'package:frontend/services/auth_service.dart';
+
 import 'package:frontend/services/client.dart';
+
 import 'package:jwt_decode/jwt_decode.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,6 +36,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
   Future<void> setToken(String token) async {
     print("before ${token}");
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -44,5 +47,13 @@ class AuthProvider extends ChangeNotifier {
     };
     print("last: ${token}");
     notifyListeners();
+=======
+  bool get isAuth {
+    if (token.isNotEmpty && Jwt.getExpiryDate(token)!.isAfter(DateTime.now())) {
+      user = User.fromJson(Jwt.parseJwt(token));
+      return true;
+    }
+    return false;
+
   }
 }

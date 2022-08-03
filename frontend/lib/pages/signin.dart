@@ -79,13 +79,20 @@ class SigninPage extends StatelessWidget {
                     // FORM BUTTON
                     CustomButton(
                       width: 300,
-                      onPressed: () {
-                        context.read<AuthProvider>().signin(
+                      onPressed: () async {
+                        await context.read<AuthProvider>().signin(
                               user: User(
                                   username: _username.text,
                                   password: _password.text),
                             );
+
                         context.go("/home");
+
+                        if (Provider.of<AuthProvider>(context, listen: false)
+                            .isAuth) {
+                          context.go("/home");
+                        }
+
                       },
                       buttonText: "Sign in",
                     ),
