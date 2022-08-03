@@ -1,3 +1,4 @@
+import 'package:frontend/models/trip.dart';
 import 'package:frontend/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -7,18 +8,21 @@ part 'profile.g.dart';
 class Profile {
   User? user;
   String? gender;
-  String? birthDate;
+  String? birth_date;
   String? image;
   String? bio;
-  String? dateJoined;
+  String? date_joined;
+  List<Trip>? trips;
+
 
   Profile({
-    required this.user,
+    this.user,
     this.gender,
-    this.birthDate,
+    this.birth_date,
     this.image,
     this.bio,
-    required this.dateJoined,
+    this.date_joined,
+    this.trips,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) =>
