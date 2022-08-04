@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/models/trip.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
 
 class TripDetailsPage extends StatelessWidget {
-  TripDetailsPage({Key? key}) : super(key: key);
+  final Trip trip;
+  TripDetailsPage({
+    Key? key,
+    required this.trip,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +35,8 @@ class TripDetailsPage extends StatelessWidget {
                   height: 325,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage(
-                          "assets/images/trip.jpg",
+                        image: NetworkImage(
+                          trip.image,
                         ),
                         fit: BoxFit.cover),
                   ),
@@ -53,7 +58,7 @@ class TripDetailsPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Trip Title",
+                        trip.title,
                         style: const TextStyle(
                           fontSize: 30,
                           color: Color(0xFF2a3f34),
@@ -113,7 +118,7 @@ class TripDetailsPage extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        "Trip Owner",
+                        trip.profile!.user!.username,
                         style: TextStyle(
                           color: Color(0xFF5B8A72),
                           fontSize: 20,
@@ -137,7 +142,7 @@ class TripDetailsPage extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+                    trip.description,
                     textAlign: TextAlign.justify,
                     style: TextStyle(
                       color: Color(0xFF2a3f34),
