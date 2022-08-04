@@ -8,8 +8,12 @@ class ProfileProvider extends ChangeNotifier {
   Profile profile = Profile();
   Future<Profile> getProfileData() async {
     profile = await ProfileService().getUserProfile();
-    notifyListeners();
-    print(profile);
     return profile;
+  }
+
+  Future<void> updateProfile(Profile profile) async {
+    print(" hEeeeeeeeeeeeeee ${profile.user!.first_name}");
+    await ProfileService().updateProfile(profile: profile);
+    notifyListeners();
   }
 }
