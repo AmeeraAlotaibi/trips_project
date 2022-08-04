@@ -106,3 +106,50 @@ class CustomTextButton extends StatelessWidget {
     );
   }
 }
+
+// FORM FIELDS FOR EDITING PROFILE
+class CustomFormField extends StatelessWidget {
+  CustomFormField({
+    Key? key,
+    required this.width,
+    required this.controller,
+    required this.hintText,
+    this.icon,
+    this.validator,
+  }) : super(key: key);
+
+  double width;
+  TextEditingController controller;
+  String hintText;
+
+  String Function(String?)? validator;
+  Icon? icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      child: TextFormField(
+        validator: validator,
+        controller: controller,
+        decoration: InputDecoration(
+          hintText: hintText,
+          prefixIcon: icon,
+          filled: true,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderSide: BorderSide(width: 1, color: Colors.black38),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              width: 2,
+              color: Color(0xFF5F7161),
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+        ),
+      ),
+    );
+  }
+}
