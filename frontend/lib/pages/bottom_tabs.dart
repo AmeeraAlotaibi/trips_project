@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/pages/add_trip.dart';
 import 'package:frontend/pages/explore.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/profile.dart';
@@ -21,6 +22,7 @@ class _TabScreenState extends State<TabScreen> {
   final List _pages = [
     HomePage(),
     ExplorePage(),
+    AddTrip(),
     ProfilePage(),
   ];
 
@@ -60,7 +62,7 @@ class _TabScreenState extends State<TabScreen> {
       // NAVIGATION ------------------------------------------
       bottomNavigationBar: BottomNavigationBar(
           // styling bottom navigation
-          backgroundColor: Color(0xFF5B8A72),
+          backgroundColor: const Color(0xFF5B8A72),
           elevation: 0,
           iconSize: 30,
           showSelectedLabels: false,
@@ -71,6 +73,7 @@ class _TabScreenState extends State<TabScreen> {
           // bottom navigation bar items
           currentIndex: _selectedIndex,
           onTap: _onTapped,
+          type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
@@ -79,6 +82,10 @@ class _TabScreenState extends State<TabScreen> {
             BottomNavigationBarItem(
               icon: Icon(Icons.explore),
               label: "Explore",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              label: "Add",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),

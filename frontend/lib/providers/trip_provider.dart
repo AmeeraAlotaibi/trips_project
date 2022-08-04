@@ -16,7 +16,7 @@ class TripProvider extends ChangeNotifier {
   Future<Trip> createTrip({required Trip trip}) async {
     newtrip = await TripService().createTrip(trip: trip);
     print("New Trip::: ${newtrip}");
-    notifyListeners();
+    // notifyListeners();
     return trip;
   }
 }

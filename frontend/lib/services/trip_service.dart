@@ -25,12 +25,18 @@ class TripService {
     late Trip newtrip;
 
     try {
+      FormData data = FormData.fromMap({
+        "title": trip.title,
+        "description": trip.description,
+        "image": await MultipartFile.fromFile(
+          trip.image,
+        ),
+      });
       Response res = await Client.dio.post(
         "new-trip/",
-        data: trip.toJson(),
+        data: data,
       );
-      print(res);
-      newtrip = res.data["access"];
+      newtrip = Trip.fromJson(res.data);
     } on DioError catch (error) {
       print(error);
     }

@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/providers/profile_provider.dart';
-import 'package:frontend/widgets/custom_widgets.dart';
+import 'package:frontend/widgets/trip_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -19,22 +16,29 @@ class ProfilePage extends StatelessWidget {
               future: context.read<ProfileProvider>().getProfileData(),
               builder: (context, dataSnapshot) {
                 if (dataSnapshot.connectionState == ConnectionState.waiting) {
-                  print("HERE Waiting");
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else {
                   return Consumer<ProfileProvider>(
                       builder: (context, profile, child) {
-                    return Column(
+                    return
+                        // SingleChildScrollView(
+                        //     physics: const AlwaysScrollableScrollPhysics(),
+                        //     padding: const EdgeInsets.symmetric(
+                        //       horizontal: 40.0,
+                        //       vertical: 120.0,
+                        //     ),
+                        //     child:
+                        Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Stack(children: [
-                          Container(
+                          SizedBox(
                             width: 125,
                             height: 125,
                             child: CircleAvatar(
-                              backgroundColor: Color(0xFF2a3f34),
+                              backgroundColor: const Color(0xFF2a3f34),
                               backgroundImage: NetworkImage(
                                 profile.profile.image == null
                                     ? "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg"
@@ -53,8 +57,8 @@ class ProfilePage extends StatelessWidget {
                                 child: Container(
                                   width: 30,
                                   height: 30,
-                                  color: Color(0xFF5B8A72),
-                                  child: Icon(
+                                  color: const Color(0xFF5B8A72),
+                                  child: const Icon(
                                     Icons.edit,
                                     size: 17,
                                     color: Colors.white,
@@ -75,18 +79,18 @@ class ProfilePage extends StatelessWidget {
                           children: [
                             Text(
                               "${profile.profile.user?.first_name} ${profile.profile.user?.last_name}",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 18.5,
                                 color: Color(0xFF5F7161),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 8,
                             ),
                             // GENDER
 
                             profile.profile.gender == ""
-                                ? Text("")
+                                ? const Text("")
                                 : profile.profile.gender == "female"
                                     ? Icon(
                                         Icons.female,
@@ -105,14 +109,14 @@ class ProfilePage extends StatelessWidget {
                         // @username -----------------------------------------
                         Text(
                           "@${profile.profile.user?.username}",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 25,
                             color: Color(0xFF2a3f34),
                             fontWeight: FontWeight.bold,
                           ),
                         ),
 
-                        SizedBox(
+                        const SizedBox(
                           width: 15,
                         ),
                         const SizedBox(
@@ -126,7 +130,7 @@ class ProfilePage extends StatelessWidget {
                             // Birth date =========================================================
                             Column(
                               children: [
-                                Text(
+                                const Text(
                                   "Birthday:",
                                   style: TextStyle(
                                     fontSize: 16,
@@ -135,7 +139,7 @@ class ProfilePage extends StatelessWidget {
                                 ),
                                 Text(
                                   profile.profile.birth_date.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF2a3f34),
                                     fontWeight: FontWeight.bold,
@@ -146,11 +150,11 @@ class ProfilePage extends StatelessWidget {
                             Container(
                               width: 1,
                               height: 50,
-                              color: Color.fromARGB(255, 202, 202, 202),
+                              color: const Color.fromARGB(255, 202, 202, 202),
                             ),
                             Column(
                               children: [
-                                Text(
+                                const Text(
                                   "Total trips:",
                                   style: TextStyle(
                                     fontSize: 16,
@@ -161,7 +165,7 @@ class ProfilePage extends StatelessWidget {
                                   profile.profile.trips?.length == null
                                       ? "0"
                                       : "${profile.profile.trips?.length}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 20,
                                     color: Color(0xFF2a3f34),
                                     fontWeight: FontWeight.bold,
@@ -177,7 +181,7 @@ class ProfilePage extends StatelessWidget {
                             // Date Joined ========================================================
                             Column(
                               children: [
-                                Text(
+                                const Text(
                                   "Joined in:",
                                   style: TextStyle(
                                     fontSize: 16,
@@ -186,7 +190,7 @@ class ProfilePage extends StatelessWidget {
                                 ),
                                 Text(
                                   profile.profile.date_joined.toString(),
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF2a3f34),
                                     fontWeight: FontWeight.bold,
@@ -205,7 +209,7 @@ class ProfilePage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "About:",
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
@@ -219,7 +223,7 @@ class ProfilePage extends StatelessWidget {
                               Text(
                                 profile.profile.bio.toString(),
                                 textAlign: TextAlign.justify,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   color: Color(0xFF2a3f34),
                                 ),
@@ -235,7 +239,7 @@ class ProfilePage extends StatelessWidget {
                         Container(
                           width: 300,
                           height: 1,
-                          color: Color.fromARGB(255, 228, 228, 228),
+                          color: const Color.fromARGB(255, 228, 228, 228),
                         ),
 
                         const SizedBox(
@@ -249,7 +253,7 @@ class ProfilePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 "Trips Lists:",
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
@@ -262,7 +266,7 @@ class ProfilePage extends StatelessWidget {
                                 onPressed: () {
                                   context.push("/user-lists");
                                 },
-                                child: Text(
+                                child: const Text(
                                   "See all",
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
@@ -283,8 +287,8 @@ class ProfilePage extends StatelessWidget {
                           },
                           child: Container(
                             width: 305,
-                            padding: EdgeInsets.symmetric(vertical: 5),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            decoration: const BoxDecoration(
                                 border: Border(
                                     top: BorderSide.none,
                                     left: BorderSide.none,
@@ -297,7 +301,7 @@ class ProfilePage extends StatelessWidget {
                               color: Colors.transparent,
                               elevation: 0,
                               child: Row(
-                                children: [
+                                children: const [
                                   Icon(
                                     Icons.list,
                                     color: Color(0xFF5F7161),
@@ -326,8 +330,8 @@ class ProfilePage extends StatelessWidget {
                           },
                           child: Container(
                             width: 305,
-                            padding: EdgeInsets.symmetric(vertical: 10),
-                            decoration: BoxDecoration(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            decoration: const BoxDecoration(
                                 border: Border(
                                     top: BorderSide.none,
                                     left: BorderSide.none,
@@ -340,7 +344,7 @@ class ProfilePage extends StatelessWidget {
                               color: Colors.transparent,
                               elevation: 0,
                               child: Row(
-                                children: [
+                                children: const [
                                   Icon(
                                     Icons.list,
                                     color: Color(0xFF5F7161),
@@ -362,8 +366,20 @@ class ProfilePage extends StatelessWidget {
                             ),
                           ),
                         ),
+
+                        ///////// #########  Profile Trips ########## /////////
+                        Expanded(
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              // physics: const NeverScrollableScrollPhysics(),
+                              itemCount: profile.profile.trips!.length,
+                              itemBuilder: (context, index) => TripCard(
+                                  trip: profile.profile.trips![index])),
+                        )
+                        //////// ######## End ######### ///////
                       ],
                     );
+                    // );
                   });
                 }
               })),
