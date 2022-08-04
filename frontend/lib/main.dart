@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/trip.dart';
+import 'package:frontend/pages/add_trip.dart';
 import 'package:frontend/pages/bottom_tabs.dart';
 import 'package:frontend/pages/edit_profile.dart';
+import 'package:frontend/pages/edit_trip.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/register.dart';
 import 'package:frontend/pages/signin.dart';
@@ -56,7 +59,15 @@ class MyApp extends StatelessWidget {
     GoRoute(path: "/home", builder: (context, state) => TabScreen()),
     GoRoute(path: "/register", builder: (context, state) => RegisterPage()),
     GoRoute(path: "/signin", builder: (context, state) => SigninPage()),
-    GoRoute(path: "/user-lists", builder: (context, state) => UserListsPage()),
+    GoRoute(
+        path: "/edit-trip",
+        builder: (context, state) => EditTrip(
+              trip: state.extra as Trip,
+            )),
+    GoRoute(
+        path: "/user-lists",
+        builder: (context, state) =>
+            UserListsPage(trips: state.extra as List<Trip>)),
     GoRoute(
         path: "/edit-profile", builder: (context, state) => EditProfilePage()),
   ]);

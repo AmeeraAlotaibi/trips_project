@@ -5,6 +5,7 @@ import 'package:frontend/services/Trip_service.dart';
 class TripProvider extends ChangeNotifier {
   late List<Trip> trips;
   late Trip newtrip;
+  late Trip updatedTrip;
 
   // all trips
   Future<List> getAllTrips() async {
@@ -15,8 +16,15 @@ class TripProvider extends ChangeNotifier {
   // create new trip
   Future<Trip> createTrip({required Trip trip}) async {
     newtrip = await TripService().createTrip(trip: trip);
-    print("New Trip::: ${newtrip}");
-    notifyListeners();
+    // notifyListeners();
     return trip;
+  }
+
+  // Edit trips
+  Future<Trip> updateTrip({required Trip trip}) async {
+    updatedTrip = await TripService().updatedTrip(trip: trip);
+    // Trip foundtrip = trips.where((element) => element.id == trip.id) as Trip;
+    notifyListeners();
+    return updatedTrip;
   }
 }

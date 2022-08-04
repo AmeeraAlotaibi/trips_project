@@ -10,11 +10,11 @@ class Trip {
   Profile? profile;
   String title;
   String description;
-  String? image;
+  String image;
 
   Trip({
     this.id,
-    required this.profile,
+    this.profile,
     required this.title,
     required this.description,
     required this.image,

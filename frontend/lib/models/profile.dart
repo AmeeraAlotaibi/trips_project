@@ -8,19 +8,22 @@ part 'profile.g.dart';
 class Profile {
   User? user;
   String? gender;
+  // ignore: non_constant_identifier_names
   String? birth_date;
   String? image;
   String? bio;
+  // ignore: non_constant_identifier_names
   String? date_joined;
   List<Trip>? trips;
-
 
   Profile({
     this.user,
     this.gender,
+    // ignore: non_constant_identifier_names
     this.birth_date,
     this.image,
     this.bio,
+    // ignore: non_constant_identifier_names
     this.date_joined,
     this.trips,
   });
