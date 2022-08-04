@@ -10,6 +10,7 @@ class TripProvider extends ChangeNotifier {
   // all trips
   Future<List> getAllTrips() async {
     trips = await TripService().allTrips();
+    // notifyListeners();
     return trips;
   }
 
