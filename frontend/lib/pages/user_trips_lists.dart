@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/models/trip.dart';
 import 'package:frontend/providers/auth_provider.dart';
+import 'package:frontend/widgets/trip_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class UserListsPage extends StatelessWidget {
-  const UserListsPage({Key? key}) : super(key: key);
+  final List<Trip> trips;
+  const UserListsPage({Key? key, required this.trips}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Color(0xFF2a3f34),
           size: 30,
         ),
@@ -33,14 +34,14 @@ class UserListsPage extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 25),
+        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 15,
             ),
-            Text(
+            const Text(
               "Trips Lists:",
               textAlign: TextAlign.left,
               style: TextStyle(
@@ -64,8 +65,8 @@ class UserListsPage extends StatelessWidget {
               },
               child: Container(
                 width: double.infinity,
-                padding: EdgeInsets.symmetric(vertical: 10),
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                decoration: const BoxDecoration(
                     border: Border(
                         top: BorderSide.none,
                         left: BorderSide.none,
@@ -78,7 +79,7 @@ class UserListsPage extends StatelessWidget {
                   color: Colors.transparent,
                   elevation: 0,
                   child: Row(
-                    children: [
+                    children: const [
                       Icon(
                         Icons.list,
                         color: Color(0xFF5F7161),
@@ -100,6 +101,14 @@ class UserListsPage extends StatelessWidget {
                 ),
               ),
             ),
+            Expanded(
+              child: ListView.builder(
+                  shrinkWrap: true,
+                  // physics: const NeverScrollableScrollPhysics(),
+                  itemCount: trips.length,
+                  itemBuilder: (context, index) =>
+                      TripCard(trip: trips[index])),
+            )
           ],
         ),
       ),

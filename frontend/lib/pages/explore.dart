@@ -13,7 +13,7 @@ class ExplorePage extends StatelessWidget {
     return Scaffold(
         body: SafeArea(
             child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
       child: FutureBuilder(
           future: context.read<TripProvider>().getAllTrips(),
           builder: (context, dataSnapshot) {
