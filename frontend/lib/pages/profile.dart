@@ -11,7 +11,7 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
           child: FutureBuilder(
               future: context.read<ProfileProvider>().getProfileData(),
               builder: (context, dataSnapshot) {
@@ -264,7 +264,8 @@ class ProfilePage extends StatelessWidget {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  context.push("/user-lists");
+                                  context.push("/user-lists",
+                                      extra: profile.profile.trips);
                                 },
                                 child: const Text(
                                   "See all",
@@ -368,14 +369,14 @@ class ProfilePage extends StatelessWidget {
                         ),
 
                         ///////// #########  Profile Trips ########## /////////
-                        Expanded(
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              // physics: const NeverScrollableScrollPhysics(),
-                              itemCount: profile.profile.trips!.length,
-                              itemBuilder: (context, index) => TripCard(
-                                  trip: profile.profile.trips![index])),
-                        )
+                        // Expanded(
+                        //   child: ListView.builder(
+                        //       shrinkWrap: true,
+                        //       // physics: const NeverScrollableScrollPhysics(),
+                        //       itemCount: profile.profile.trips!.length,
+                        //       itemBuilder: (context, index) => TripCard(
+                        //           trip: profile.profile.trips![index])),
+                        // )
                         //////// ######## End ######### ///////
                       ],
                     );

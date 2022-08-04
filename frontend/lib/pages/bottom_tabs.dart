@@ -42,7 +42,7 @@ class _TabScreenState extends State<TabScreen> {
           size: 30,
         ),
         elevation: 0,
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color(0xFF5B8A72),
         actions: [
           GestureDetector(
             onTap: () {

@@ -7,34 +7,45 @@ import 'package:frontend/widgets/custom_widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-class AddTrip extends StatefulWidget {
-  const AddTrip({Key? key}) : super(key: key);
+class EditTrip extends StatefulWidget {
+  final Trip trip;
+  const EditTrip({Key? key, required this.trip}) : super(key: key);
 
   @override
-  State<AddTrip> createState() => _AddTripState();
+  State<EditTrip> createState() => _EditTripState();
 }
 
-class _AddTripState extends State<AddTrip> {
+class _EditTripState extends State<EditTrip> {
   var _image;
   final _picker = ImagePicker();
   // bool _rememberMe = false;
   var title = TextEditingController();
   var description = TextEditingController();
 
+  void initState() {
+    super.initState();
+    // add post frame callback to update the image
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      title.text = widget.trip.title;
+      description.text = widget.trip.description;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("New Trip")),
+      appBar: AppBar(title: const Text("Edit Trip")),
       floatingActionButton: CustomButton(
         onPressed: () async {
-          await context.read<TripProvider>().createTrip(
+          await context.read<TripProvider>().updateTrip(
                 trip: Trip(
-                    image: _image?.path,
+                    id: widget.trip.id,
+                    image: _image?.path ?? "",
                     title: title.text,
                     description: description.text),
               );
         },
-        buttonText: "Add Trip",
+        buttonText: "Edit Trip",
         width: double.infinity,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -53,26 +64,22 @@ class _AddTripState extends State<AddTrip> {
                   });
                 },
                 child: Container(
-                  width: double.infinity,
-                  height: 300,
-                  decoration: BoxDecoration(color: Colors.blue[200]),
-                  child: _image != null
-                      ? Image.file(
-                          _image,
-                          width: 200.0,
-                          height: 200.0,
-                          fit: BoxFit.cover,
-                        )
-                      : Container(
-                          decoration: BoxDecoration(color: Colors.blue[200]),
-                          width: 200,
-                          height: 200,
-                          child: Icon(
-                            Icons.camera_alt,
-                            color: Colors.grey[800],
-                          ),
-                        ),
-                ),
+                    width: double.infinity,
+                    height: 300,
+                    decoration: BoxDecoration(color: Colors.blue[200]),
+                    child: _image != null
+                        ? Image.file(
+                            _image,
+                            width: 200.0,
+                            height: 200.0,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            widget.trip.image,
+                            width: 200.0,
+                            height: 200.0,
+                            fit: BoxFit.cover,
+                          )),
               ),
               // Trip Title
               Padding(
@@ -90,6 +97,7 @@ class _AddTripState extends State<AddTrip> {
                       ),
                     ),
                     TextField(
+                      // initialValue: widget.trip.title,
                       controller: title,
                       textAlign: TextAlign.left,
                       style: const TextStyle(
@@ -114,6 +122,7 @@ class _AddTripState extends State<AddTrip> {
                       ),
                     ),
                     TextField(
+                      // initialValue: widget.trip.description,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       controller: description,
