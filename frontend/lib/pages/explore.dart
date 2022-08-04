@@ -15,7 +15,7 @@ class ExplorePage extends StatelessWidget {
             child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
       child: FutureBuilder(
-          future: context.read<TripProvider>().getAllTrips(),
+          future: context.watch<TripProvider>().getAllTrips(),
           builder: (context, dataSnapshot) {
             if (dataSnapshot.connectionState == ConnectionState.waiting) {
               return const Center(
