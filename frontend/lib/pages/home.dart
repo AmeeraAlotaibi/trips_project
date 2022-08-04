@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/providers/profile_provider.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,14 +11,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // BODY ----------------------------------------------
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
-          child: Column(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Consumer<ProfileProvider>(builder: (context, home, child) {
+          return Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Row(
@@ -28,19 +30,17 @@ class HomePage extends StatelessWidget {
                       Text(
                         "Welcome Back,".toUpperCase(),
                         textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 25,
+                        style: const TextStyle(
+                          fontSize: 20,
                           color: Color.fromARGB(255, 145, 161, 147),
                           fontWeight: FontWeight.bold,
                           letterSpacing: 1.25,
                         ),
                       ),
-
-                      // will change this later to display the first name of the user
                       Text(
-                        "user".toUpperCase(),
+                        home.profile.user!.username.toUpperCase(),
                         textAlign: TextAlign.left,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 30,
                           color: Color(0xFF5B8A72),
                           fontWeight: FontWeight.bold,
@@ -53,15 +53,35 @@ class HomePage extends StatelessWidget {
                   CircleAvatar(
                     radius: 40,
                     backgroundColor: Color(0xFF5B8A72),
+                    backgroundImage: NetworkImage(
+                      home.profile.image.toString(),
+                    ),
                   )
                 ],
               ),
               const SizedBox(
                 height: 25,
               ),
+              Container(
+                width: double.infinity,
+                height: 1,
+                color: Colors.grey[300],
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              const Text(
+                "Latest Trips:",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color(0xFF2a3f34),
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.25,
+                ),
+              )
             ],
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

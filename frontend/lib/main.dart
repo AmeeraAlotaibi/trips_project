@@ -7,6 +7,7 @@ import 'package:frontend/pages/edit_trip.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/register.dart';
 import 'package:frontend/pages/signin.dart';
+import 'package:frontend/pages/trip_details.dart';
 import 'package:frontend/pages/user_trips_lists.dart';
 import 'package:frontend/providers/auth_provider.dart';
 
@@ -70,6 +71,9 @@ class MyApp extends StatelessWidget {
             UserListsPage(trips: state.extra as List<Trip>)),
     GoRoute(
         path: "/edit-profile", builder: (context, state) => EditProfilePage()),
+    GoRoute(path: "/add-trip", builder: (context, state) => AddTrip()),
+    GoRoute(
+        path: "/trip-details", builder: (context, state) => TripDetailsPage()),
   ]);
 }
 
