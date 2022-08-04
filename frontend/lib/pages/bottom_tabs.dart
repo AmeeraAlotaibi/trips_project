@@ -37,12 +37,24 @@ class _TabScreenState extends State<TabScreen> {
     return Scaffold(
       // APPBAR ------------------------------------
       appBar: AppBar(
+        titleTextStyle: TextStyle(
+          color: Color(0xFF2a3f34),
+          fontWeight: FontWeight.bold,
+          fontSize: 20,
+        ),
+        title: _selectedIndex == 0
+            ? Text("Home")
+            : _selectedIndex == 1
+                ? Text("Explore")
+                : _selectedIndex == 2
+                    ? Text("New Trip")
+                    : Text("Profile"),
         iconTheme: IconThemeData(
           color: Color(0xFF2a3f34),
           size: 30,
         ),
         elevation: 0,
-        backgroundColor: const Color(0xFF5B8A72),
+        backgroundColor: Colors.transparent,
         actions: [
           GestureDetector(
             onTap: () {

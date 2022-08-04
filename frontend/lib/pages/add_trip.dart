@@ -24,7 +24,6 @@ class _AddTripState extends State<AddTrip> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("New Trip")),
       floatingActionButton: CustomButton(
         onPressed: () async {
           await context.read<TripProvider>().createTrip(
