@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:frontend/models/profile.dart';
 import 'package:frontend/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -12,11 +14,13 @@ class Trip {
   String? owner;
   String description;
   String image;
+  String? owner_image;
 
   Trip({
     this.id,
     this.profile,
     this.owner,
+    this.owner_image,
     required this.title,
     required this.description,
     required this.image,

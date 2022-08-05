@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/providers/trip_provider.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_markdown_editor/simple_markdown_editor.dart';
@@ -26,6 +27,11 @@ class _AddTripState extends State<AddTrip> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: Text("Create New Trip"),
+        centerTitle: true,
+      ),
       floatingActionButton: CustomButton(
         onPressed: () async {
           await context.read<TripProvider>().createTrip(
@@ -34,11 +40,13 @@ class _AddTripState extends State<AddTrip> {
                     title: title.text,
                     description: description.text),
               );
+          context.pop();
         },
         buttonText: "Add Trip",
         width: double.infinity,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+
       body: Padding(
         padding: const EdgeInsets.only(bottom: 60.0),
         child: Column(
@@ -70,6 +78,7 @@ class _AddTripState extends State<AddTrip> {
                           Icons.camera_alt,
                           color: Colors.grey[800],
                         ),
+
                       ),
               ),
             ),
@@ -87,12 +96,35 @@ class _AddTripState extends State<AddTrip> {
                       color: Color(0xFF2a3f34),
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
-                  TextField(
-                    controller: title,
-                    textAlign: TextAlign.left,
-                    style: const TextStyle(
-                      fontSize: 20,
+
+                    SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      controller: title,
+                      textAlign: TextAlign.left,
+                      style: const TextStyle(
+                        fontSize: 20,
+                      ),
+                      decoration: InputDecoration(
+                        filled: true,
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        fillColor: Colors.white,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: Color(0xFF2a3f34),
+                          ),
+                        ),
+                      ),
+
                     ),
                   ),
                 ],
@@ -111,6 +143,7 @@ class _AddTripState extends State<AddTrip> {
                       color: Color(0xFF2a3f34),
                       fontWeight: FontWeight.bold,
                     ),
+
                   ),
                   // editable text with toolbar
                   Container(
@@ -122,6 +155,25 @@ class _AddTripState extends State<AddTrip> {
                         enableToolBar: true,
                         emojiConvert: true,
                         autoCloseAfterSelectEmoji: false,
+
+                      ),
+                      decoration: InputDecoration(
+                        filled: true,
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        fillColor: Colors.white,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: Color(0xFF2a3f34),
+                          ),
+                        ),
                       ),
                     ),
                   ),

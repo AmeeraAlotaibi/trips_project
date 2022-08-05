@@ -228,7 +228,7 @@ class ProfilePage extends StatelessWidget {
                         ),
 
                         const SizedBox(
-                          height: 25,
+                          height: 10,
                         ),
 
                         Container(
@@ -238,7 +238,7 @@ class ProfilePage extends StatelessWidget {
                         ),
 
                         const SizedBox(
-                          height: 20,
+                          height: 5,
                         ),
 
                         // Trips Lists ===========================================================
