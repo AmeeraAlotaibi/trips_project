@@ -56,7 +56,7 @@ class TripCard extends StatelessWidget {
                       height: 2,
                     ),
                     Text(
-                      trip.profile!.user!.username,
+                      trip.owner!,
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 12.5,

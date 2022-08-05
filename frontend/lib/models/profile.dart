@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/models/user.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -6,24 +8,26 @@ part 'profile.g.dart';
 
 @JsonSerializable()
 class Profile {
-  User? user;
+  int? user;
   String? gender;
-  // ignore: non_constant_identifier_names
+  String? username;
   String? birth_date;
+  String? first_name;
+  String? last_name;
   String? image;
   String? bio;
-  // ignore: non_constant_identifier_names
   String? date_joined;
   List<Trip>? trips;
 
   Profile({
     this.user,
     this.gender,
-    // ignore: non_constant_identifier_names
+    this.username,
     this.birth_date,
+    this.first_name,
+    this.last_name,
     this.image,
     this.bio,
-    // ignore: non_constant_identifier_names
     this.date_joined,
     this.trips,
   });
