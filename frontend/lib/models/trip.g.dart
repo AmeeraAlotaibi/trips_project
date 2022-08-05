@@ -10,7 +10,7 @@ Trip _$TripFromJson(Map<String, dynamic> json) => Trip(
       id: json['id'] as int?,
       profile: json['profile'] as int?,
       title: json['title'] as String,
-      owner: json['owner'] as String,
+      owner: json['owner'] as String?,
       description: json['description'] as String,
       image: json['image'] as String,
     );
