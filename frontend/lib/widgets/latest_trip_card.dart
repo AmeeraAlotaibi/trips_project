@@ -45,6 +45,7 @@ class LatestTripCard extends StatelessWidget {
               left: 10,
               child: Text(
                 trips.title,
+                overflow: TextOverflow.fade,
                 style: TextStyle(
                   fontSize: 16.5,
                   color: Color(0xFF2a3f34),

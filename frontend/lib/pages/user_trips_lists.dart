@@ -42,7 +42,7 @@ class UserListsPage extends StatelessWidget {
               height: 15,
             ),
             const Text(
-              "Trips Lists:",
+              "All Trips:",
               textAlign: TextAlign.left,
               style: TextStyle(
                 fontSize: 20,
@@ -52,54 +52,13 @@ class UserListsPage extends StatelessWidget {
             ),
             // line
             Container(
-              margin: EdgeInsets.symmetric(vertical: 20),
+              margin: EdgeInsets.symmetric(vertical: 15),
               width: double.infinity,
               height: 1,
               color: Color.fromARGB(255, 202, 202, 202),
             ),
-
-            // list item------------
-            InkWell(
-              onTap: () {
-                // -------------------------------------
-              },
-              child: Container(
-                width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                decoration: const BoxDecoration(
-                    border: Border(
-                        top: BorderSide.none,
-                        left: BorderSide.none,
-                        right: BorderSide.none,
-                        bottom: BorderSide(
-                          width: 1,
-                          color: Color.fromARGB(255, 228, 228, 228),
-                        ))),
-                child: Card(
-                  color: Colors.transparent,
-                  elevation: 0,
-                  child: Row(
-                    children: const [
-                      Icon(
-                        Icons.list,
-                        color: Color(0xFF5F7161),
-                        size: 27,
-                      ),
-                      SizedBox(
-                        width: 15,
-                      ),
-                      Text(
-                        "Want to go",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF5F7161),
-                          fontSize: 18.5,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+            const SizedBox(
+              height: 15,
             ),
             Expanded(
               child: ListView.builder(
@@ -108,7 +67,7 @@ class UserListsPage extends StatelessWidget {
                   itemCount: trips.length,
                   itemBuilder: (context, index) =>
                       TripCard(trip: trips[index])),
-            )
+            ),
           ],
         ),
       ),

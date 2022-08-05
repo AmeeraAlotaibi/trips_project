@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/profile.dart';
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/services/Trip_service.dart';
 
@@ -8,7 +9,7 @@ class TripProvider extends ChangeNotifier {
   late Trip updatedTrip;
 
   // all trips
-  Future<List> getAllTrips() async {
+  Future<List<Trip>> getAllTrips() async {
     trips = await TripService().allTrips();
     // notifyListeners();
     return trips;
@@ -27,5 +28,16 @@ class TripProvider extends ChangeNotifier {
     // Trip foundtrip = trips.where((element) => element.id == trip.id) as Trip;
     notifyListeners();
     return updatedTrip;
+  }
+
+  Future<List<Trip>> getFav(List<Trip> favs) async {
+    trips = await getAllTrips();
+    List<Trip>? favorites = [];
+    for (Trip trip in trips) {
+      if (favs.any((trip) => trip == trip.id)) {
+        favorites.add(trip);
+      }
+    }
+    return favorites;
   }
 }

@@ -228,7 +228,7 @@ class ProfilePage extends StatelessWidget {
                         ),
 
                         const SizedBox(
-                          height: 10,
+                          height: 15,
                         ),
 
                         Container(
@@ -242,123 +242,142 @@ class ProfilePage extends StatelessWidget {
                         ),
 
                         // Trips Lists ===========================================================
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Trips Lists:",
-                                textAlign: TextAlign.left,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  color: Color(0xFF2a3f34),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  context.push("/user-lists",
-                                      extra: profile.profile.trips);
-                                },
-                                child: const Text(
-                                  "See all",
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: Color(0xFF5F7161),
-                                    fontWeight: FontWeight.bold,
+                        SizedBox(
+                          height: 150,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text(
+                                        "Trips Lists:",
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Color(0xFF2a3f34),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          context.push("/user-lists",
+                                              extra: profile.profile.trips);
+                                        },
+                                        child: const Text(
+                                          "See all trips",
+                                          textAlign: TextAlign.left,
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            color: Color(0xFF5F7161),
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ),
 
-                        // TRIPS LISTS CARDS ------------------------------------------
-                        InkWell(
-                          onTap: () {
-                            // -------------------------------------
-                          },
-                          child: Container(
-                            width: 305,
-                            padding: const EdgeInsets.symmetric(vertical: 5),
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                    top: BorderSide.none,
-                                    left: BorderSide.none,
-                                    right: BorderSide.none,
-                                    bottom: BorderSide(
-                                      width: 1,
-                                      color: Color.fromARGB(255, 228, 228, 228),
-                                    ))),
-                            child: Card(
-                              color: Colors.transparent,
-                              elevation: 0,
-                              child: Row(
-                                children: const [
-                                  Icon(
-                                    Icons.list,
-                                    color: Color(0xFF5F7161),
-                                    size: 27,
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    "Want to go",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFF5F7161),
-                                      fontSize: 18.5,
+                                // TRIPS LISTS CARDS ------------------------------------------
+                                InkWell(
+                                  onTap: () {
+                                    // -------------------------------------
+                                  },
+                                  child: Container(
+                                    width: 305,
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 5),
+                                    decoration: const BoxDecoration(
+                                      border: Border(
+                                        top: BorderSide.none,
+                                        left: BorderSide.none,
+                                        right: BorderSide.none,
+                                        bottom: BorderSide(
+                                          width: 1,
+                                          color: Color.fromARGB(
+                                              255, 228, 228, 228),
+                                        ),
+                                      ),
+                                    ),
+                                    child: Card(
+                                      color: Colors.transparent,
+                                      elevation: 0,
+                                      child: Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.list,
+                                            color: Color(0xFF5F7161),
+                                            size: 27,
+                                          ),
+                                          SizedBox(
+                                            width: 15,
+                                          ),
+                                          Text(
+                                            "Want to go",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF5F7161),
+                                              fontSize: 18.5,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                                ),
 
-                        InkWell(
-                          onTap: () {
-                            // ---------------------
-                          },
-                          child: Container(
-                            width: 305,
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            decoration: const BoxDecoration(
-                                border: Border(
-                                    top: BorderSide.none,
-                                    left: BorderSide.none,
-                                    right: BorderSide.none,
-                                    bottom: BorderSide(
-                                      width: 1,
-                                      color: Color.fromARGB(255, 228, 228, 228),
-                                    ))),
-                            child: Card(
-                              color: Colors.transparent,
-                              elevation: 0,
-                              child: Row(
-                                children: const [
-                                  Icon(
-                                    Icons.list,
-                                    color: Color(0xFF5F7161),
-                                    size: 27,
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Text(
-                                    "Favorites",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      color: Color(0xFF5F7161),
-                                      fontSize: 18.5,
+                                InkWell(
+                                  onTap: () {
+                                    // ---------------------
+                                  },
+                                  child: Container(
+                                    width: 305,
+                                    padding:
+                                        const EdgeInsets.symmetric(vertical: 5),
+                                    decoration: const BoxDecoration(
+                                        border: Border(
+                                            top: BorderSide.none,
+                                            left: BorderSide.none,
+                                            right: BorderSide.none,
+                                            bottom: BorderSide(
+                                              width: 1,
+                                              color: Color.fromARGB(
+                                                  255, 228, 228, 228),
+                                            ))),
+                                    child: Card(
+                                      color: Colors.transparent,
+                                      elevation: 0,
+                                      child: Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.list,
+                                            color: Color(0xFF5F7161),
+                                            size: 27,
+                                          ),
+                                          SizedBox(
+                                            width: 15,
+                                          ),
+                                          Text(
+                                            "Favorites",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF5F7161),
+                                              fontSize: 18.5,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
