@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/providers/trip_provider.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,11 @@ class _AddTripState extends State<AddTrip> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: Text("Create New Trip"),
+        centerTitle: true,
+      ),
       floatingActionButton: CustomButton(
         onPressed: () async {
           await context.read<TripProvider>().createTrip(
@@ -32,6 +38,7 @@ class _AddTripState extends State<AddTrip> {
                     title: title.text,
                     description: description.text),
               );
+          context.pop();
         },
         buttonText: "Add Trip",
         width: double.infinity,
@@ -63,7 +70,7 @@ class _AddTripState extends State<AddTrip> {
                           fit: BoxFit.cover,
                         )
                       : Container(
-                          decoration: BoxDecoration(color: Colors.blue[200]),
+                          decoration: BoxDecoration(color: Colors.grey[300]),
                           width: 200,
                           height: 200,
                           child: Icon(
@@ -73,7 +80,10 @@ class _AddTripState extends State<AddTrip> {
                         ),
                 ),
               ),
-              // Trip Title
+
+              SizedBox(
+                height: 20,
+              ), // Trip Title
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Column(
@@ -88,11 +98,32 @@ class _AddTripState extends State<AddTrip> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    SizedBox(
+                      height: 10,
+                    ),
                     TextField(
                       controller: title,
                       textAlign: TextAlign.left,
                       style: const TextStyle(
                         fontSize: 20,
+                      ),
+                      decoration: InputDecoration(
+                        filled: true,
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        fillColor: Colors.white,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: Color(0xFF2a3f34),
+                          ),
+                        ),
                       ),
                     ),
                   ],
@@ -112,6 +143,9 @@ class _AddTripState extends State<AddTrip> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    const SizedBox(
+                      height: 10,
+                    ),
                     TextField(
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
@@ -119,6 +153,24 @@ class _AddTripState extends State<AddTrip> {
                       textAlign: TextAlign.left,
                       style: const TextStyle(
                         fontSize: 20,
+                      ),
+                      decoration: InputDecoration(
+                        filled: true,
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                        fillColor: Colors.white,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            width: 2,
+                            color: Color(0xFF2a3f34),
+                          ),
+                        ),
                       ),
                     ),
                   ],

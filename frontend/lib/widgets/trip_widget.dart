@@ -11,59 +11,73 @@ class TripCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8.0),
       child: GestureDetector(
         onTap: () {
-          context.push('/edit-trip', extra: trip);
+          context.push('/trip-details',
+              extra: trip); // change this later to TRIP DETAILS!!!!!
         },
         child: Stack(
           children: [
             Container(
               width: 400,
-              height: 150,
+              height: 175,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(5),
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(trip.image),
                 ),
               ),
             ),
-            Container(
-              width: 400,
-              height: 150,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                gradient: const LinearGradient(
-                  colors: [Colors.transparent, Colors.black],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
+            Positioned(
+              bottom: 0,
+              child: Container(
+                width: 350,
+                height: 50,
+                decoration: BoxDecoration(
+                  color: Colors.white,
                 ),
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      trip.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 30,
-                        fontWeight: FontWeight.bold,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        trip.title,
+                        style: const TextStyle(
+                          color: Color(0xFF2a3f34),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 2,
-                    ),
-                    Text(
-                      trip.owner!,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 12.5,
-                        fontWeight: FontWeight.bold,
+                      Row(
+                        children: [
+                          Text(
+                            "by:  ${trip.owner!}",
+                            style: const TextStyle(
+                              color: Color(0xFF2a3f34),
+                              fontSize: 14,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          SizedBox(
+                            width: 30,
+                            height: 30,
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                trip.profile!.image == null
+                                    ? "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg"
+                                    : trip.profile!.image.toString(),
+                              ),
+                            ),
+                          )
+                        ],
+
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -84,7 +98,7 @@ class TripCard extends StatelessWidget {
                     child: const Icon(
                       Icons.favorite,
                       size: 20,
-                      color: Colors.red,
+                      color: Colors.grey,
                     ),
                     onTap: () {
                       // FUNCTION TO ADD TO LIST OF FAVORITE TRIPS
