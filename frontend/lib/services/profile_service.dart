@@ -21,23 +21,32 @@ class ProfileService {
   // Update Profile
   Future<Profile> updateProfile({required Profile profile}) async {
     try {
-      FormData data = FormData.fromMap({
-        "user": profile.user,
-        "username": profile.user!.username,
-        "first_name": profile.user!.first_name,
-        "last_name": profile.user!.last_name,
-        "birth_date": profile.birth_date,
-        "gender": profile.gender,
-        "bio": profile.bio,
-        "username": profile.user!.username,
-        "image": await MultipartFile.fromFile(
-          profile.image!,
-        ),
-      });
-
-      print("HERE ------- ${profile.user!.username}");
-      Response res = await Client.dio.patch("my-profile/", data: data);
-      profile = Profile.fromJson(res.data);
+      if (profile.image == "") {
+        FormData data = FormData.fromMap({
+          "user": profile.user,
+          "first_name": profile.first_name,
+          "last_name": profile.last_name,
+          "birth_date": profile.birth_date,
+          "gender": profile.gender,
+          "bio": profile.bio,
+        });
+        Response res = await Client.dio.patch("my-profile/", data: data);
+        profile = Profile.fromJson(res.data);
+      } else {
+        FormData data = FormData.fromMap({
+          "user": profile.user,
+          "first_name": profile.first_name,
+          "last_name": profile.last_name,
+          "birth_date": profile.birth_date,
+          "gender": profile.gender,
+          "bio": profile.bio,
+          "image": await MultipartFile.fromFile(
+            profile.image!,
+          ),
+        });
+        Response res = await Client.dio.patch("my-profile/", data: data);
+        profile = Profile.fromJson(res.data);
+      }
     } on DioError catch (error) {
       print(error.message);
     }

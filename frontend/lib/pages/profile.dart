@@ -29,11 +29,11 @@ class ProfilePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Stack(children: [
-                          Container(
+                          SizedBox(
                             width: 125,
                             height: 125,
                             child: CircleAvatar(
-                              backgroundColor: Color(0xFF2a3f34),
+                              backgroundColor: const Color(0xFF2a3f34),
                               backgroundImage: NetworkImage(
                                 profile.profile.image == null
                                     ? "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg"
@@ -52,7 +52,7 @@ class ProfilePage extends StatelessWidget {
                                 child: Container(
                                   width: 30,
                                   height: 30,
-                                  color: Color(0xFF5B8A72),
+                                  color: const Color(0xFF5B8A72),
                                   child: const Icon(
                                     Icons.edit,
                                     size: 17,
@@ -73,7 +73,7 @@ class ProfilePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "${profile.profile.user?.first_name} ${profile.profile.user?.last_name}",
+                              "${profile.profile.first_name} ${profile.profile.last_name}",
                               style: const TextStyle(
                                 fontSize: 18.5,
                                 color: Color(0xFF5F7161),
@@ -85,7 +85,7 @@ class ProfilePage extends StatelessWidget {
                             // GENDER
 
                             profile.profile.gender == ""
-                                ? Text("")
+                                ? const Text("")
                                 : profile.profile.gender == "female"
                                     ? Icon(
                                         Icons.female,
@@ -103,7 +103,7 @@ class ProfilePage extends StatelessWidget {
                         ),
                         // @username -----------------------------------------
                         Text(
-                          "@${profile.profile.user?.username}",
+                          "@${profile.profile.username}",
                           style: const TextStyle(
                             fontSize: 25,
                             color: Color(0xFF2a3f34),
@@ -259,7 +259,8 @@ class ProfilePage extends StatelessWidget {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  context.push("/user-lists");
+                                  context.push("/user-lists",
+                                      extra: profile.profile.trips);
                                 },
                                 child: const Text(
                                   "See all",

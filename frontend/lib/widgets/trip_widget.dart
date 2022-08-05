@@ -53,7 +53,7 @@ class TripCard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "by:  ${trip.profile!.user!.username}",
+                            "by:  ${trip.owner!}",
                             style: const TextStyle(
                               color: Color(0xFF2a3f34),
                               fontSize: 14,
@@ -74,6 +74,7 @@ class TripCard extends StatelessWidget {
                             ),
                           )
                         ],
+
                       ),
                     ],
                   ),

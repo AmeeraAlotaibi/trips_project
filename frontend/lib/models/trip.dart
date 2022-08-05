@@ -7,14 +7,16 @@ part 'trip.g.dart';
 @JsonSerializable()
 class Trip {
   int? id;
-  Profile? profile;
+  int? profile;
   String title;
+  String? owner;
   String description;
   String image;
 
   Trip({
     this.id,
     this.profile,
+    this.owner,
     required this.title,
     required this.description,
     required this.image,
