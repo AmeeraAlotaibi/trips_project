@@ -17,6 +17,8 @@ class Profile {
   String? image;
   String? bio;
   String? date_joined;
+  List<int>? want_to;
+  List<int>? favorite;
   List<Trip>? trips;
 
   Profile({
@@ -26,6 +28,8 @@ class Profile {
     this.birth_date,
     this.first_name,
     this.last_name,
+    this.want_to,
+    this.favorite,
     this.image,
     this.bio,
     this.date_joined,
