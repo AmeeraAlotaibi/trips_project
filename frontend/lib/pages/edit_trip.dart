@@ -6,6 +6,7 @@ import 'package:frontend/providers/trip_provider.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_markdown_editor/widgets/markdown_form_field.dart';
 
 class EditTrip extends StatefulWidget {
   final Trip trip;
@@ -121,16 +122,28 @@ class _EditTripState extends State<EditTrip> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    TextField(
-                      // initialValue: widget.trip.description,
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      controller: description,
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                        fontSize: 20,
+                    Container(
+                      height: 220,
+                      alignment: Alignment.center,
+                      child: Expanded(
+                        child: MarkdownFormField(
+                          controller: description,
+                          enableToolBar: true,
+                          emojiConvert: true,
+                          autoCloseAfterSelectEmoji: false,
+                        ),
                       ),
                     ),
+                    // TextField(
+                    //   // initialValue: widget.trip.description,
+                    //   keyboardType: TextInputType.multiline,
+                    //   maxLines: null,
+                    //   controller: description,
+                    //   textAlign: TextAlign.left,
+                    //   style: const TextStyle(
+                    //     fontSize: 20,
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
