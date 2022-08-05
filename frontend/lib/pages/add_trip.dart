@@ -7,6 +7,7 @@ import 'package:frontend/widgets/custom_widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:simple_markdown_editor/widgets/markdown_form_field.dart';
 
 class AddTrip extends StatefulWidget {
   const AddTrip({Key? key}) : super(key: key);
@@ -146,30 +147,36 @@ class _AddTripState extends State<AddTrip> {
                     const SizedBox(
                       height: 10,
                     ),
-                    TextField(
-                      keyboardType: TextInputType.multiline,
-                      maxLines: null,
-                      controller: description,
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(
-                        fontSize: 20,
-                      ),
-                      decoration: InputDecoration(
-                        filled: true,
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-                        fillColor: Colors.white,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 1,
-                            color: Colors.grey,
+                    Container(
+                      height: 220,
+                      alignment: Alignment.center,
+                      child: Expanded(
+                        child: MarkdownFormField(
+                          controller: description,
+                          enableToolBar: true,
+                          emojiConvert: true,
+                          autoCloseAfterSelectEmoji: false,
+                          style: const TextStyle(
+                            fontSize: 20,
                           ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            width: 2,
-                            color: Color(0xFF2a3f34),
-                          ),
+                          // decoration: InputDecoration(
+                          //   filled: true,
+                          //   contentPadding:
+                          //       EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+                          //   fillColor: Colors.white,
+                          //   enabledBorder: OutlineInputBorder(
+                          //     borderSide: BorderSide(
+                          //       width: 1,
+                          //       color: Colors.grey,
+                          //     ),
+                          //   ),
+                          //   focusedBorder: OutlineInputBorder(
+                          //     borderSide: BorderSide(
+                          //       width: 2,
+                          //       color: Color(0xFF2a3f34),
+                          //     ),
+                          //   ),
+                          // ),
                         ),
                       ),
                     ),
