@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/providers/profile_provider.dart';
+import 'package:frontend/providers/trip_provider.dart';
+import 'package:frontend/widgets/latest_trip_card.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -78,6 +80,41 @@ class HomePage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1.25,
                 ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+
+              // List VIEW
+              Container(
+                height: 175,
+                child: FutureBuilder(
+                    future: context.read<TripProvider>().getAllTrips(),
+                    builder: (context, dataSnapshot) {
+                      if (dataSnapshot.connectionState ==
+                          ConnectionState.waiting) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return Consumer<TripProvider>(
+                            builder: (context, trips, child) {
+                          return ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            separatorBuilder: (context, _) => SizedBox(
+                              width: 12,
+                            ),
+                            itemCount: (trips.trips
+                                .skip(trips.trips.length - 5)
+                                .take(4)
+                                .length),
+                            itemBuilder: (context, index) => LatestTripCard(
+                              trips: trips.trips[index],
+                            ),
+                          );
+                        });
+                      }
+                    }),
               )
             ],
           );

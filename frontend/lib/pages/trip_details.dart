@@ -93,7 +93,7 @@ class TripDetailsPage extends StatelessWidget {
                                 color: Colors.white,
                                 shape: BoxShape.circle,
                                 border: Border.all(
-                                  color: Colors.grey,
+                                  color: Color.fromARGB(238, 214, 214, 214),
                                 )),
                             child: GestureDetector(
                               child: const Icon(
@@ -114,8 +114,19 @@ class TripDetailsPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        width: 35,
+                        height: 35,
+                        child: CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            trip.profile!.image == null
+                                ? "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg"
+                                : trip.profile!.image.toString(),
+                          ),
+                        ),
+                      ),
                       const SizedBox(
-                        width: 5,
+                        width: 10,
                       ),
                       Text(
                         trip.profile!.user!.username,

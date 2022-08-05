@@ -22,7 +22,6 @@ class _TabScreenState extends State<TabScreen> {
   final List _pages = [
     HomePage(),
     ExplorePage(),
-    AddTrip(),
     ProfilePage(),
   ];
 
@@ -47,8 +46,8 @@ class _TabScreenState extends State<TabScreen> {
             : _selectedIndex == 1
                 ? Text("Explore")
                 : _selectedIndex == 2
-                    ? Text("New Trip")
-                    : Text("Profile"),
+                    ? Text("Profile")
+                    : Text("f"),
         iconTheme: IconThemeData(
           color: Color(0xFF2a3f34),
           size: 30,
@@ -94,10 +93,6 @@ class _TabScreenState extends State<TabScreen> {
             BottomNavigationBarItem(
               icon: Icon(Icons.explore),
               label: "Explore",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add),
-              label: "Add",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
