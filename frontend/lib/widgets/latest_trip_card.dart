@@ -56,7 +56,7 @@ class LatestTripCard extends StatelessWidget {
               bottom: 9,
               left: 10,
               child: Text(
-                trips.profile!.user!.username,
+                trips.owner!,
                 style: TextStyle(
                   fontSize: 12.5,
                   color: Color(0xFF5B8A72),

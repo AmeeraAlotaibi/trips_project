@@ -137,9 +137,9 @@ class TripDetailsPage extends StatelessWidget {
                         height: 35,
                         child: CircleAvatar(
                           backgroundImage: NetworkImage(
-                            trip.profile!.image == null
+                            trip.owner_image == null
                                 ? "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg"
-                                : trip.profile!.image.toString(),
+                                : trip.owner_image.toString(),
                           ),
                         ),
                       ),
@@ -147,7 +147,7 @@ class TripDetailsPage extends StatelessWidget {
                         width: 10,
                       ),
                       Text(
-                        trip.profile!.user!.username,
+                        trip.owner!,
                         style: TextStyle(
                           color: Color(0xFF5B8A72),
                           fontSize: 20,

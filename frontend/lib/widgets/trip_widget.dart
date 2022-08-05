@@ -30,9 +30,9 @@ class TripCard extends StatelessWidget {
             Positioned(
               bottom: 0,
               child: Container(
-                width: 350,
+                width: 380,
                 height: 50,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 child: Padding(
@@ -67,14 +67,13 @@ class TripCard extends StatelessWidget {
                             height: 30,
                             child: CircleAvatar(
                               backgroundImage: NetworkImage(
-                                trip.profile!.image == null
+                                trip.owner_image == null
                                     ? "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg"
-                                    : trip.profile!.image.toString(),
+                                    : trip.owner_image.toString(),
                               ),
                             ),
                           )
                         ],
-
                       ),
                     ],
                   ),

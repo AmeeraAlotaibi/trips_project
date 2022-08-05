@@ -15,33 +15,32 @@ class ExplorePage extends StatelessWidget {
             // CREATE NEW TRIP
             context.push("/add-trip");
           },
-          child: Icon(
+          backgroundColor: const Color(0xFF5B8A72),
+          child: const Icon(
             Icons.add,
             size: 30,
           ),
-          backgroundColor: Color(0xFF5B8A72),
         ),
         body: SafeArea(
             child: Padding(
-
-      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-      child: FutureBuilder(
-          future: context.watch<TripProvider>().getAllTrips(),
-          builder: (context, dataSnapshot) {
-            if (dataSnapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            } else {
-              return Consumer<TripProvider>(builder: (context, trips, child) {
-                return ListView.builder(
-                    itemCount: trips.trips.length,
-                    itemBuilder: (context, index) =>
-                        TripCard(trip: trips.trips[index]));
-              });
-            }
-          }),
-    )));
-
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+          child: FutureBuilder(
+              future: context.watch<TripProvider>().getAllTrips(),
+              builder: (context, dataSnapshot) {
+                if (dataSnapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } else {
+                  return Consumer<TripProvider>(
+                      builder: (context, trips, child) {
+                    return ListView.builder(
+                        itemCount: trips.trips.length,
+                        itemBuilder: (context, index) =>
+                            TripCard(trip: trips.trips[index]));
+                  });
+                }
+              }),
+        )));
   }
 }

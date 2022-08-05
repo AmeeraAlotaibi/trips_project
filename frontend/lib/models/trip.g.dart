@@ -13,6 +13,7 @@ Trip _$TripFromJson(Map<String, dynamic> json) => Trip(
       owner: json['owner'] as String?,
       description: json['description'] as String,
       image: json['image'] as String,
+      owner_image: json['owner_image'] as String,
     );
 
 Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
@@ -21,4 +22,5 @@ Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
       'title': instance.title,
       'description': instance.description,
       'image': instance.image,
+      'owner': instance.owner,
     };
