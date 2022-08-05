@@ -15,11 +15,15 @@ class Trip {
   String description;
   String image;
   String? owner_image;
+  List<int>? want_to;
+  List<int>? favorite;
 
   Trip({
     this.id,
     this.profile,
     this.owner,
+    this.want_to,
+    this.favorite,
     this.owner_image,
     required this.title,
     required this.description,

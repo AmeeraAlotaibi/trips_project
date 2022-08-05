@@ -9,18 +9,25 @@ part of 'trip.dart';
 Trip _$TripFromJson(Map<String, dynamic> json) => Trip(
       id: json['id'] as int?,
       profile: json['profile'] as int?,
-      title: json['title'] as String,
       owner: json['owner'] as String?,
+      want_to:
+          (json['want_to'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      favorite:
+          (json['favorite'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      owner_image: json['owner_image'] as String?,
+      title: json['title'] as String,
       description: json['description'] as String,
       image: json['image'] as String,
-      owner_image: json['owner_image'] as String,
     );
 
 Map<String, dynamic> _$TripToJson(Trip instance) => <String, dynamic>{
       'id': instance.id,
       'profile': instance.profile,
       'title': instance.title,
+      'owner': instance.owner,
       'description': instance.description,
       'image': instance.image,
-      'owner': instance.owner,
+      'owner_image': instance.owner_image,
+      'want_to': instance.want_to,
+      'favorite': instance.favorite,
     };
