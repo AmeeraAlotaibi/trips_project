@@ -3,6 +3,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
+import 'package:go_router/go_router.dart';
 
 class TripDetailsPage extends StatelessWidget {
   final Trip trip;
@@ -71,6 +72,23 @@ class TripDetailsPage extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () {
                               // ADD TRIP TO WANT TO GO LIST
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: Text("Success!"),
+                                  content: Text(
+                                      "Successfully added ${trip.title} to list!"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        context.pop();
+                                      },
+                                      child: Text("OK"),
+                                    )
+                                  ],
+                                ),
+                                barrierDismissible: false,
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               elevation: 0,
