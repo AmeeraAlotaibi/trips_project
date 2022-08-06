@@ -6,6 +6,7 @@ import 'package:frontend/models/trip.dart';
 import 'package:frontend/providers/profile_provider.dart';
 import 'package:frontend/providers/trip_provider.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
+import 'package:frontend/widgets/questions_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
@@ -265,26 +266,78 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                   ),
 
                   const SizedBox(
-                    height: 30,
+                    height: 15,
                   ),
-                  Text(
-                    "Description:",
-                    style: TextStyle(
-                      color: Color(0xFF2a3f34),
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    widget.trip.description,
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(
-                      color: Color(0xFF2a3f34),
-                      fontSize: 15,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Description:",
+                        style: TextStyle(
+                          color: Color(0xFF2a3f34),
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        widget.trip.description,
+                        textAlign: TextAlign.justify,
+                        style: TextStyle(
+                          color: Color(0xFF2a3f34),
+                          fontSize: 15,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        "Q&A Section",
+                        style: TextStyle(
+                          color: Color(0xFF2a3f34),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10, bottom: 15),
+                        width: double.infinity,
+                        height: 1,
+                        color: Colors.grey[300],
+                      ),
+
+                      // QUESTION CARD!!!!
+                      QuestionCard(
+                        asker_image:
+                            "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg",
+                        owner_image: widget.trip.owner_image!,
+                        question: "Question",
+                        answer: "Answer",
+                      ),
+                      QuestionCard(
+                        asker_image:
+                            "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg",
+                        owner_image: widget.trip.owner_image!,
+                        question: "Question",
+                        answer: "Answer",
+                      ),
+                      QuestionCard(
+                        asker_image:
+                            "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg",
+                        owner_image: widget.trip.owner_image!,
+                        question: "Question",
+                        answer: "Answer",
+                      ),
+                      QuestionCard(
+                        asker_image:
+                            "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg",
+                        owner_image: widget.trip.owner_image!,
+                        question: "Question",
+                        answer: "Answer",
+                      ),
+                    ],
                   ),
                 ],
               ),
