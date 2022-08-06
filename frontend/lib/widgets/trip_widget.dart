@@ -14,7 +14,6 @@ class TripCard extends StatefulWidget {
 
 class _TripCardState extends State<TripCard> {
   bool isFav = false;
-  List<Trip> favorites = [];
 
   @override
   Widget build(BuildContext context) {
@@ -125,14 +124,8 @@ class _TripCardState extends State<TripCard> {
                       setState(() {
                         isFav = !isFav;
                         if (isFav == true) {
-                          favorites.add(widget.trip);
-                          context.read<TripProvider>().getFav(favorites);
-                          print("Added: ${favorites}");
-                        } else {
-                          favorites.remove(widget.trip);
-                          context.read<TripProvider>().getFav(favorites);
-                          print("Removed: ${favorites}");
-                        }
+                          context.read<TripProvider>().addFav(widget.trip);
+                        } else {}
                       });
                     },
                   ),

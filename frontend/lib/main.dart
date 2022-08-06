@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/profile.dart';
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/pages/add_trip.dart';
 import 'package:frontend/pages/bottom_tabs.dart';
 import 'package:frontend/pages/edit_profile.dart';
 import 'package:frontend/pages/edit_trip.dart';
+import 'package:frontend/pages/favorites_list.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/register.dart';
 import 'package:frontend/pages/signin.dart';
 import 'package:frontend/pages/trip_details.dart';
+import 'package:frontend/pages/user_profile.dart';
 import 'package:frontend/pages/user_trips_lists.dart';
 import 'package:frontend/providers/auth_provider.dart';
 
@@ -77,6 +80,16 @@ class MyApp extends StatelessWidget {
         builder: (context, state) => TripDetailsPage(
               trip: state.extra as Trip,
             )),
+    GoRoute(
+        path: "/my-favorites",
+        builder: (context, state) => FavoritesPage()), // change this later
+    GoRoute(
+      path: "/user-profile",
+      builder: (context, state) => UserProfilePage(
+        user: state.extra as Profile,
+        id: state.extra as int,
+      ),
+    ), // change this later
   ]);
 }
 

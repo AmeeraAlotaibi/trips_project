@@ -15,4 +15,10 @@ class ProfileProvider extends ChangeNotifier {
     await ProfileService().updateProfile(profile: profile);
     notifyListeners();
   }
+
+  Future<Profile> getOtherProfile(int id) async {
+    Profile userProfile = Profile();
+    userProfile = await ProfileService().getOtherUsersProfile(user: id);
+    return userProfile;
+  }
 }

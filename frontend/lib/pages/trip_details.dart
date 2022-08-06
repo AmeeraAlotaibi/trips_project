@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/models/trip.dart';
+import 'package:frontend/providers/profile_provider.dart';
+import 'package:frontend/providers/trip_provider.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 class TripDetailsPage extends StatefulWidget {
   final Trip trip;
@@ -19,10 +22,23 @@ class TripDetailsPage extends StatefulWidget {
 
 class _TripDetailsPageState extends State<TripDetailsPage> {
   bool isFav = false;
-
+  bool isPressed = false;
   @override
   Widget build(BuildContext context) {
+    String? user = context.watch<ProfileProvider>().profile.username;
     return Scaffold(
+      floatingActionButton: widget.trip.owner == user
+          ? FloatingActionButton(
+              onPressed: () {
+                context.push("/edit-trip", extra: widget.trip);
+              },
+              backgroundColor: const Color(0xFF5B8A72),
+              child: const Icon(
+                Icons.edit,
+                size: 25,
+              ),
+            )
+          : null,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
@@ -31,6 +47,29 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
           color: Colors.white,
           size: 30,
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: widget.trip.owner == user
+                ? GestureDetector(
+                    onTap: () {
+                      context
+                          .read<TripProvider>()
+                          .updateTrip(trip: widget.trip);
+                    },
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 20,
+                      child: Icon(
+                        Icons.delete_forever_rounded,
+                        color: Colors.red,
+                        size: 25.5,
+                      ),
+                    ),
+                  )
+                : null,
+          )
+        ],
       ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
@@ -135,44 +174,77 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                           const SizedBox(
                             width: 10,
                           ),
-                          Text(
-                            widget.trip.owner!,
-                            style: TextStyle(
-                              color: Color(0xFF5B8A72),
-                              fontSize: 20,
+                          GestureDetector(
+                            onTap: () {
+                              context.push("/user-profile",
+                                  extra: widget.trip.profile);
+                            },
+                            child: Text(
+                              widget.trip.owner!,
+                              style: TextStyle(
+                                color: Color(0xFF5B8A72),
+                                fontSize: 20,
+                              ),
                             ),
                           ),
                         ],
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          // ADD TRIP TO WANT TO GO LIST
-                          showDialog(
-                            context: context,
-                            builder: (_) => AlertDialog(
-                              title: Text("Success!"),
-                              content: Text(
-                                  "Successfully added ${widget.trip.title} to list!"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    context.pop();
-                                  },
-                                  child: Text("OK"),
-                                )
-                              ],
+                      Container(
+                        width: 125,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            // ADD TRIP TO WANT TO GO LIST
+                            setState(() {
+                              isPressed = !isPressed;
+                              print(isPressed);
+                            });
+                            if (isPressed == true) {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: Text("Success!"),
+                                  content: Text(
+                                      "Successfully added ${widget.trip.title} to list!"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text("OK"),
+                                    )
+                                  ],
+                                ),
+                              );
+                            } else {
+                              showDialog(
+                                context: context,
+                                builder: (_) => AlertDialog(
+                                  title: Text("Success!"),
+                                  content: Text(
+                                      "Successfully removed ${widget.trip.title} from list!"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () => Navigator.pop(context),
+                                      child: Text("OK"),
+                                    )
+                                  ],
+                                ),
+                              );
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            primary: isPressed == true
+                                ? Colors.white
+                                : Color(0xFF5B8A72),
+                          ),
+                          child: Text(
+                            isPressed == false ? "Want To Go" : "Remove",
+                            style: TextStyle(
+                              color: isPressed == false
+                                  ? Colors.white
+                                  : Color(0xFF5B8A72),
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
                             ),
-                            barrierDismissible: false,
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          "Want To Go",
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),

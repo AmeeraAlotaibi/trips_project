@@ -77,4 +77,35 @@ class TripService {
     }
     return updatedTrip;
   }
+
+  // TO ADD TO MY FAVORITES LIST
+  Future<List<Trip>> addFav(Trip trip) async {
+    late List<Trip> favorites;
+    try {
+      Response res = await Client.dio.patch(
+        "trips/add-favorite/${trip.id}/",
+        data: trip.toJson(),
+      );
+      print(res);
+      favorites =
+          (res.data as List).map((trip) => Trip.fromJson(trip)).toList();
+      print("LIST OF TRIPS: ${favorites}");
+    } on DioError catch (error) {
+      print(error);
+    }
+    return favorites;
+  }
+
+  // TO GET MY FAVORITES LIST
+  Future<List<Trip>> getMyFav() async {
+    late List<Trip> favorites = [];
+    try {
+      Response res = await Client.dio.get("trips/my-favorite/");
+      favorites =
+          (res.data as List).map((trip) => Trip.fromJson(trip)).toList();
+    } on DioError catch (error) {
+      print(error);
+    }
+    return favorites;
+  }
 }

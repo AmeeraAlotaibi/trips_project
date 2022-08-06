@@ -28,9 +28,6 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -93,7 +90,7 @@ class HomePage extends StatelessWidget {
                       height: 15,
                     ),
 
-                    // List VIEW
+                    // List VIEW for LATEST TRIPS
                     Container(
                       height: 175,
                       child: FutureBuilder(
@@ -112,10 +109,7 @@ class HomePage extends StatelessWidget {
                                   separatorBuilder: (context, _) => SizedBox(
                                     width: 12,
                                   ),
-                                  itemCount: (trips.trips
-                                      .skip(trips.trips.length - 5)
-                                      .take(4)
-                                      .length),
+                                  itemCount: (trips.trips.length),
                                   itemBuilder: (context, index) =>
                                       LatestTripCard(
                                     trips: trips.trips[index],
@@ -124,7 +118,51 @@ class HomePage extends StatelessWidget {
                               });
                             }
                           }),
-                    )
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    const Text(
+                      "Next Adventures:",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Color(0xFF2a3f34),
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.25,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    // LIST VIEW FOR NEXT STOPS:
+                    Container(
+                      height: 175,
+                      child: FutureBuilder(
+                          future: context.read<TripProvider>().getMyFavs(),
+                          builder: (context, dataSnapshot) {
+                            if (dataSnapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else {
+                              return Consumer<TripProvider>(
+                                  builder: (context, trips, child) {
+                                return ListView.separated(
+                                  scrollDirection: Axis.horizontal,
+                                  separatorBuilder: (context, _) => SizedBox(
+                                    width: 12,
+                                  ),
+                                  itemCount: (trips.trips.length),
+                                  itemBuilder: (context, index) =>
+                                      LatestTripCard(
+                                    trips: trips.trips[index],
+                                  ),
+                                );
+                              });
+                            }
+                          }),
+                    ),
                   ],
                 );
               });
