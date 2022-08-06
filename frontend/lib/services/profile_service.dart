@@ -14,7 +14,6 @@ class ProfileService {
     } on DioError catch (error) {
       print(error);
     }
-    print(profile);
     return profile;
   }
 
@@ -54,5 +53,15 @@ class ProfileService {
     return profile;
   }
 
-  //
+  //GET OTHER USERS PROFILE
+  Future<Profile> getOtherUsersProfile({required int user}) async {
+    Profile profile = Profile();
+    try {
+      Response res = await Client.dio.get("profile/$user/");
+      profile = Profile.fromJson(res.data);
+    } on DioError catch (error) {
+      print(error);
+    }
+    return profile;
+  }
 }

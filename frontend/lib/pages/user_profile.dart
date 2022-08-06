@@ -1,20 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/models/profile.dart';
 import 'package:frontend/providers/profile_provider.dart';
+import 'package:frontend/providers/trip_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
-import '../providers/trip_provider.dart';
-
-class ProfilePage extends StatelessWidget {
-  const ProfilePage({Key? key}) : super(key: key);
-
+class UserProfilePage extends StatelessWidget {
+  UserProfilePage({Key? key, required this.user, required this.id})
+      : super(key: key);
+  final Profile user;
+  final int id;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Color(0xFF2a3f34),
+          size: 30,
+        ),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25),
           child: FutureBuilder(
-              future: context.watch<ProfileProvider>().getProfileData(),
+              future: context.watch<ProfileProvider>().getOtherProfile(id),
               builder: (context, dataSnapshot) {
                 if (dataSnapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -286,9 +298,7 @@ class ProfilePage extends StatelessWidget {
                                 // TRIPS LISTS CARDS ------------------------------------------
                                 InkWell(
                                   onTap: () {
-                                    // Want To Go LIST
-                                    context.push("/my-want-to",
-                                        extra: profile.profile.want_to);
+                                    // -------------------------------------
                                   },
                                   child: Container(
                                     width: 305,
@@ -336,8 +346,7 @@ class ProfilePage extends StatelessWidget {
                                 InkWell(
                                   onTap: () {
                                     // FAVORITES LIST
-                                    context.push("/my-favorites",
-                                        extra: profile.profile.favorite);
+                                    context.push("/my-favorites");
                                   },
                                   child: Container(
                                     width: 305,

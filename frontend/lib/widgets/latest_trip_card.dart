@@ -43,12 +43,16 @@ class LatestTripCard extends StatelessWidget {
             Positioned(
               bottom: 25,
               left: 10,
-              child: Text(
-                trips.title,
-                style: TextStyle(
-                  fontSize: 16.5,
-                  color: Color(0xFF2a3f34),
-                  fontWeight: FontWeight.bold,
+              child: SizedBox(
+                width: 125,
+                child: Text(
+                  trips.title,
+                  style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: 16.5,
+                    color: Color(0xFF2a3f34),
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             ),

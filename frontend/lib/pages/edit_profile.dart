@@ -122,23 +122,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     height: 15,
                   ),
                   // first name and last name fields
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CustomFormField(
-                          width: 162,
-                          controller: _firstName,
-                          hintText: "first name",
-                        ),
-                        CustomFormField(
-                          width: 162,
-                          controller: _lastName,
-                          hintText: "last name",
-                        ),
-                      ],
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CustomFormField(
+                        width: 165,
+                        controller: _firstName,
+                        hintText: "first name",
+                      ),
+                      CustomFormField(
+                        width: 165,
+                        controller: _lastName,
+                        hintText: "last name",
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 20,

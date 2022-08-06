@@ -6,6 +6,7 @@ import 'package:frontend/pages/explore.dart';
 import 'package:frontend/pages/home.dart';
 import 'package:frontend/pages/profile.dart';
 import 'package:frontend/providers/auth_provider.dart';
+import 'package:frontend/providers/profile_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 

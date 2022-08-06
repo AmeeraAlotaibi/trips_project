@@ -6,9 +6,10 @@ import 'package:frontend/providers/trip_provider.dart';
 import 'package:frontend/widgets/latest_trip_card.dart';
 import 'package:provider/provider.dart';
 
+import '../models/profile.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +29,6 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 50,
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -69,62 +67,99 @@ class HomePage extends StatelessWidget {
                         )
                       ],
                     ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 1,
-                      color: Colors.grey[300],
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    const Text(
-                      "Latest Trips:",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Color(0xFF2a3f34),
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.25,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+                    FutureBuilder(
+                        future: context.watch<TripProvider>().getAllTrips(),
+                        builder: (context, dataSnapshot) {
+                          if (dataSnapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          } else {
+                            return Consumer<TripProvider>(
+                                builder: (context, trips, child) {
+                              return Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 1,
+                                    color: Colors.grey[300],
+                                  ),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  const Text(
+                                    "Latest Trips:",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color(0xFF2a3f34),
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1.25,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
 
-                    // List VIEW
-                    Container(
-                      height: 175,
-                      child: FutureBuilder(
-                          future: context.read<TripProvider>().getAllTrips(),
-                          builder: (context, dataSnapshot) {
-                            if (dataSnapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
+                                  // List VIEW for LATEST TRIPS
+                                  SizedBox(
+                                      height: 175,
+                                      child: SizedBox(
+                                        height: 175,
+                                        child: ListView.separated(
+                                          scrollDirection: Axis.horizontal,
+                                          separatorBuilder: (context, _) =>
+                                              const SizedBox(
+                                            width: 12,
+                                          ),
+                                          itemCount: (trips.trips.length),
+                                          itemBuilder: (context, index) =>
+                                              LatestTripCard(
+                                            trips: trips.trips[index],
+                                          ),
+                                        ),
+                                      )),
+                                  const SizedBox(
+                                    height: 25,
+                                  ),
+                                  const Text(
+                                    "Next Adventures:",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color(0xFF2a3f34),
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 1.25,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  // LIST VIEW FOR NEXT STOPS:
+                                  Container(
+                                      height: 175,
+                                      child: SizedBox(
+                                        height: 175,
+                                        child: ListView.separated(
+                                          scrollDirection: Axis.horizontal,
+                                          separatorBuilder: (context, _) =>
+                                              SizedBox(
+                                            width: 12,
+                                          ),
+                                          itemCount: (trips.trips.length),
+                                          itemBuilder: (context, index) =>
+                                              LatestTripCard(
+                                            trips: trips.trips[index],
+                                          ),
+                                        ),
+                                      )),
+                                ],
                               );
-                            } else {
-                              return Consumer<TripProvider>(
-                                  builder: (context, trips, child) {
-                                return ListView.separated(
-                                  scrollDirection: Axis.horizontal,
-                                  separatorBuilder: (context, _) => SizedBox(
-                                    width: 12,
-                                  ),
-                                  itemCount: (trips.trips
-                                      .skip(trips.trips.length - 5)
-                                      .take(4)
-                                      .length),
-                                  itemBuilder: (context, index) =>
-                                      LatestTripCard(
-                                    trips: trips.trips[index],
-                                  ),
-                                );
-                              });
-                            }
-                          }),
-                    )
+                            });
+                          }
+                        }),
                   ],
                 );
               });

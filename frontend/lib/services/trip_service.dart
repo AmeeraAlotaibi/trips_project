@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:frontend/models/profile.dart';
 import 'package:frontend/models/trip.dart';
+import 'package:frontend/providers/profile_provider.dart';
 import 'package:frontend/services/client.dart';
 import '../models/user.dart';
 
@@ -76,5 +78,53 @@ class TripService {
       print(error);
     }
     return updatedTrip;
+  }
+
+  // Delete trip ================================
+  Future<void> deleteTrip({required Trip trip}) async {
+    try {
+      await Client.dio.delete(
+        "trip/${trip.id}",
+      );
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+
+  // TO ADD TO MY FAVORITES LIST
+  Future<void> addFav(Trip trip) async {
+    try {
+      await Client.dio.patch(
+        "trips/add-favorite/${trip.id}/",
+        data: trip.toJson(),
+      );
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+
+  // TO ADD TO MY FAVORITES LIST
+  Future<void> wantTo(Trip trip) async {
+    try {
+      await Client.dio.patch(
+        "trips/want-to/${trip.id}/",
+        data: trip.toJson(),
+      );
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+
+  // TO GET MY FAVORITES LIST
+  Future<List<Trip>> getMyFav() async {
+    late List<Trip> favorites = [];
+    try {
+      Response res = await Client.dio.get("trips/my-favorite/");
+      favorites =
+          (res.data as List).map((trip) => Trip.fromJson(trip)).toList();
+    } on DioError catch (error) {
+      print(error);
+    }
+    return favorites;
   }
 }
