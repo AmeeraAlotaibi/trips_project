@@ -286,7 +286,9 @@ class ProfilePage extends StatelessWidget {
                                 // TRIPS LISTS CARDS ------------------------------------------
                                 InkWell(
                                   onTap: () {
-                                    // -------------------------------------
+                                    // Want To Go LIST
+                                    context.push("/my-want-to",
+                                        extra: profile.profile.want_to);
                                   },
                                   child: Container(
                                     width: 305,

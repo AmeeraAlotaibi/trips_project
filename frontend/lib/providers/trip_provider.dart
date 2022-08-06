@@ -64,9 +64,19 @@ class TripProvider extends ChangeNotifier {
         favorites.add(trip);
       }
     }
-    print(favorites);
     // notifyListeners();
     return favorites;
+  }
+
+  List<Trip> getMyWantTO(List<int> wants) {
+    List<Trip> wantsList = [];
+    for (Trip trip in trips) {
+      if (wants.any((element) => element == trip.id)) {
+        wantsList.add(trip);
+      }
+    }
+    // notifyListeners();
+    return wantsList;
   }
 
   bool isFav(Trip trip, Profile profile) {
