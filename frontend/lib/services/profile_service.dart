@@ -14,7 +14,6 @@ class ProfileService {
     } on DioError catch (error) {
       print(error);
     }
-    print(profile);
     return profile;
   }
 

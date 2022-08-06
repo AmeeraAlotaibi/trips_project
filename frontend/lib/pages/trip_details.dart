@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:frontend/models/profile.dart';
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/providers/profile_provider.dart';
 import 'package:frontend/providers/trip_provider.dart';
@@ -11,11 +12,10 @@ import 'package:provider/provider.dart';
 class TripDetailsPage extends StatefulWidget {
   final Trip trip;
 
-  TripDetailsPage({
+  const TripDetailsPage({
     Key? key,
     required this.trip,
   }) : super(key: key);
-
   @override
   State<TripDetailsPage> createState() => _TripDetailsPageState();
 }
@@ -23,6 +23,13 @@ class TripDetailsPage extends StatefulWidget {
 class _TripDetailsPageState extends State<TripDetailsPage> {
   bool isFav = false;
   bool isPressed = false;
+  void initState() {
+    // TODO: implement initState
+    Profile profile = context.read<ProfileProvider>().profile;
+    isFav = context.read<TripProvider>().isFav(widget.trip, profile);
+    isPressed = context.read<TripProvider>().isWantTo(widget.trip, profile);
+  }
+
   @override
   Widget build(BuildContext context) {
     String? user = context.watch<ProfileProvider>().profile.username;
@@ -55,7 +62,17 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                     onTap: () {
                       context
                           .read<TripProvider>()
-                          .updateTrip(trip: widget.trip);
+                          .deleteTrip(trip: widget.trip);
+                      final scaffold = ScaffoldMessenger.of(context);
+                      scaffold.showSnackBar(SnackBar(
+                        content:
+                            Text("Successfully deleted ${widget.trip.title}!"),
+                        backgroundColor: Color.fromARGB(255, 145, 161, 147),
+                        action: SnackBarAction(
+                            label: 'Hide',
+                            textColor: Colors.black,
+                            onPressed: scaffold.hideCurrentSnackBar),
+                      ));
                     },
                     child: CircleAvatar(
                       backgroundColor: Colors.white,
@@ -196,38 +213,34 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                             // ADD TRIP TO WANT TO GO LIST
                             setState(() {
                               isPressed = !isPressed;
-                              print(isPressed);
+                              context
+                                  .read<ProfileProvider>()
+                                  .wantTO(widget.trip);
                             });
                             if (isPressed == true) {
-                              showDialog(
-                                context: context,
-                                builder: (_) => AlertDialog(
-                                  title: Text("Success!"),
-                                  content: Text(
-                                      "Successfully added ${widget.trip.title} to list!"),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text("OK"),
-                                    )
-                                  ],
-                                ),
-                              );
+                              final scaffold = ScaffoldMessenger.of(context);
+                              scaffold.showSnackBar(SnackBar(
+                                content: Text(
+                                    "Successfully added ${widget.trip.title} to list!"),
+                                backgroundColor:
+                                    Color.fromARGB(255, 145, 161, 147),
+                                action: SnackBarAction(
+                                    label: 'Hide',
+                                    textColor: Colors.black,
+                                    onPressed: scaffold.hideCurrentSnackBar),
+                              ));
                             } else {
-                              showDialog(
-                                context: context,
-                                builder: (_) => AlertDialog(
-                                  title: Text("Success!"),
-                                  content: Text(
-                                      "Successfully removed ${widget.trip.title} from list!"),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () => Navigator.pop(context),
-                                      child: Text("OK"),
-                                    )
-                                  ],
-                                ),
-                              );
+                              final scaffold = ScaffoldMessenger.of(context);
+                              scaffold.showSnackBar(SnackBar(
+                                content: Text(
+                                    "Successfully removed ${widget.trip.title} from list!"),
+                                backgroundColor:
+                                    Color.fromARGB(255, 145, 161, 147),
+                                action: SnackBarAction(
+                                    label: 'Hide',
+                                    textColor: Colors.black,
+                                    onPressed: scaffold.hideCurrentSnackBar),
+                              ));
                             }
                           },
                           style: ElevatedButton.styleFrom(

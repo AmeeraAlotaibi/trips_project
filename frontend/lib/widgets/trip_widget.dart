@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/profile.dart';
 import 'package:frontend/models/trip.dart';
+import 'package:frontend/providers/profile_provider.dart';
 import 'package:frontend/providers/trip_provider.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -14,6 +16,12 @@ class TripCard extends StatefulWidget {
 
 class _TripCardState extends State<TripCard> {
   bool isFav = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    Profile profile = context.read<ProfileProvider>().profile;
+    isFav = context.read<TripProvider>().isFav(widget.trip, profile);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -96,42 +104,43 @@ class _TripCardState extends State<TripCard> {
             ),
 
             // Favorite button
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: Container(
-                  width: 30,
-                  height: 30,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: GestureDetector(
-                    child: isFav == false
-                        ? Icon(
-                            Icons.favorite_outline,
-                            color: Colors.red,
-                            size: 20,
-                          )
-                        : Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                            size: 20,
-                          ),
-                    onTap: () {
-                      // FUNCTION TO ADD TO LIST OF FAVORITE TRIPS
-                      setState(() {
-                        isFav = !isFav;
-                        if (isFav == true) {
-                          context.read<TripProvider>().addFav(widget.trip);
-                        } else {}
-                      });
-                    },
+            Consumer<TripProvider>(builder: (context, trips, child) {
+              return Padding(
+                padding: const EdgeInsets.all(10),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: Container(
+                    width: 30,
+                    height: 30,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: GestureDetector(
+                      child: !isFav
+                          ? const Icon(
+                              Icons.favorite_outline,
+                              color: Colors.red,
+                              size: 20,
+                            )
+                          : const Icon(
+                              Icons.favorite,
+                              color: Colors.red,
+                              size: 20,
+                            ),
+                      onTap: () {
+                        // FUNCTION TO ADD TO LIST OF FAVORITE TRIPS
+                        setState(() {
+                          context.read<ProfileProvider>().addFav(widget.trip,
+                              context.read<ProfileProvider>().profile);
+                          isFav = !isFav;
+                        });
+                      },
+                    ),
                   ),
                 ),
-              ),
-            )
+              );
+            })
           ],
         ),
       ),

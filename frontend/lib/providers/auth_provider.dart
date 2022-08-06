@@ -17,7 +17,6 @@ class AuthProvider extends ChangeNotifier {
   Future<void> register({required User user}) async {
     token = await AuthService().register(user: user);
     await setToken(token);
-    print("REGISTER TOKEN::: ${token}");
     notifyListeners();
   }
 
@@ -25,26 +24,21 @@ class AuthProvider extends ChangeNotifier {
   Future<void> signin({required User user}) async {
     token = await AuthService().signin(user: user);
     await setToken(token);
-    print("SIGNIN TOKEN::: ${token}");
     notifyListeners();
   }
 
   // logout
   void logout() {
     token = "";
-    print("Logged out");
     notifyListeners();
   }
 
   Future<void> setToken(String token) async {
-    print("before ${token}");
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    print("First: ${token}");
     prefs.setString("token", token);
     Client.dio.options.headers = {
       HttpHeaders.authorizationHeader: 'Bearer $token',
     };
-    print("last: ${token}");
     notifyListeners();
   }
 }

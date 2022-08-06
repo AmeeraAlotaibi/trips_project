@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:frontend/models/trip.dart';
 import 'package:frontend/widgets/trip_widget.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/trip_provider.dart';
 
 class FavoritesPage extends StatelessWidget {
-  FavoritesPage({Key? key, this.trips}) : super(key: key);
-  final List<Trip>? trips;
+  final List<int> favs;
+  const FavoritesPage({Key? key, required this.favs}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    // List<Trip> trips = context.read<TripProvider>().getMyFavs(trips);
     return Scaffold(
         appBar: AppBar(
           iconTheme: const IconThemeData(
@@ -18,35 +19,40 @@ class FavoritesPage extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
         ),
-        body: trips == null
-            ? Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.not_interested_sharp,
-                      size: 50,
-                      color: Colors.red,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "You have no favorites yet!",
-                      style: TextStyle(
-                        fontSize: 25,
+        body: Consumer<TripProvider>(builder: (context, trips, child) {
+          return trips.getMyFavs(favs).isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.not_interested_sharp,
+                        size: 50,
+                        color: Colors.red,
                       ),
-                    ),
-                  ],
-                ),
-              )
-            : Expanded(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: trips!.length,
-                  itemBuilder: (context, index) =>
-                      TripCard(trip: trips![index]),
-                ),
-              ));
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "You have no favorites yet!",
+                        style: TextStyle(
+                          fontSize: 25,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : SafeArea(
+                  child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: trips.getMyFavs(favs).length,
+                    itemBuilder: (context, index) =>
+                        TripCard(trip: trips.getMyFavs(favs)[index]),
+                  ),
+                ));
+        }));
   }
 }

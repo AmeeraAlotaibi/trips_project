@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/providers/profile_provider.dart';
-import 'package:frontend/providers/trip_provider.dart';
-import 'package:frontend/widgets/custom_widgets.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import '../providers/auth_provider.dart';
+
+import '../providers/trip_provider.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -337,8 +334,8 @@ class ProfilePage extends StatelessWidget {
                                 InkWell(
                                   onTap: () {
                                     // FAVORITES LIST
-                                    context.push("/my-favorites");
-                                    context.read<TripProvider>().getMyFavs();
+                                    context.push("/my-favorites",
+                                        extra: profile.profile.favorite);
                                   },
                                   child: Container(
                                     width: 305,

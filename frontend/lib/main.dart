@@ -73,6 +73,10 @@ class MyApp extends StatelessWidget {
         builder: (context, state) =>
             UserListsPage(trips: state.extra as List<Trip>)),
     GoRoute(
+        path: "/my-favorites",
+        builder: (context, state) =>
+            FavoritesPage(favs: state.extra as List<int>)), // change this later
+    GoRoute(
         path: "/edit-profile", builder: (context, state) => EditProfilePage()),
     GoRoute(path: "/add-trip", builder: (context, state) => AddTrip()),
     GoRoute(
@@ -80,9 +84,6 @@ class MyApp extends StatelessWidget {
         builder: (context, state) => TripDetailsPage(
               trip: state.extra as Trip,
             )),
-    GoRoute(
-        path: "/my-favorites",
-        builder: (context, state) => FavoritesPage()), // change this later
     GoRoute(
       path: "/user-profile",
       builder: (context, state) => UserProfilePage(
