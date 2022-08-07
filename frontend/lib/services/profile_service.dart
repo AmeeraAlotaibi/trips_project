@@ -54,10 +54,10 @@ class ProfileService {
   }
 
   //GET OTHER USERS PROFILE
-  Future<Profile> getOtherUsersProfile({required int user}) async {
+  Future<Profile> getOtherUsersProfile({required int id}) async {
     Profile profile = Profile();
     try {
-      Response res = await Client.dio.get("profile/$user/");
+      Response res = await Client.dio.get("profile/$id/");
       profile = Profile.fromJson(res.data);
     } on DioError catch (error) {
       print(error);

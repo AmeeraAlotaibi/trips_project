@@ -9,6 +9,8 @@ import 'package:frontend/services/trip_service.dart';
 
 class ProfileProvider extends ChangeNotifier {
   late Profile profile = Profile();
+  late Profile userProfile = Profile();
+
   late bool loading = true;
   Future<Profile> getProfileData() async {
     profile = await ProfileService().getUserProfile();
@@ -22,8 +24,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   Future<Profile> getOtherProfile(int id) async {
-    Profile userProfile = Profile();
-    userProfile = await ProfileService().getOtherUsersProfile(user: id);
+    userProfile = await ProfileService().getOtherUsersProfile(id: id);
     return userProfile;
   }
 

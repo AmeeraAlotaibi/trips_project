@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:frontend/models/profile.dart';
+import 'package:frontend/models/question.dart';
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/providers/profile_provider.dart';
 import 'package:frontend/providers/trip_provider.dart';
+import 'package:frontend/widgets/ask_question_dialog.dart';
 import 'package:frontend/widgets/custom_widgets.dart';
 import 'package:frontend/widgets/questions_widget.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+
+import '../services/client.dart';
 
 class TripDetailsPage extends StatefulWidget {
   final Trip trip;
@@ -22,6 +26,7 @@ class TripDetailsPage extends StatefulWidget {
 }
 
 class _TripDetailsPageState extends State<TripDetailsPage> {
+  final question = TextEditingController();
   bool isFav = false;
   bool isPressed = false;
   void initState() {
@@ -46,7 +51,19 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                 size: 25,
               ),
             )
-          : null,
+          : FloatingActionButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AskQuestion(
+                        trip: widget.trip,
+                      );
+                    });
+              },
+              backgroundColor: const Color(0xFF5B8A72),
+              child: const Text("Ask"),
+            ),
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
@@ -68,14 +85,15 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                       scaffold.showSnackBar(SnackBar(
                         content:
                             Text("Successfully deleted ${widget.trip.title}!"),
-                        backgroundColor: Color.fromARGB(255, 145, 161, 147),
+                        backgroundColor:
+                            const Color.fromARGB(255, 145, 161, 147),
                         action: SnackBarAction(
                             label: 'Hide',
                             textColor: Colors.black,
                             onPressed: scaffold.hideCurrentSnackBar),
                       ));
                     },
-                    child: CircleAvatar(
+                    child: const CircleAvatar(
                       backgroundColor: Colors.white,
                       radius: 20,
                       child: Icon(
@@ -236,7 +254,7 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                                 content: Text(
                                     "Successfully removed ${widget.trip.title} from list!"),
                                 backgroundColor:
-                                    Color.fromARGB(255, 145, 161, 147),
+                                    const Color.fromARGB(255, 145, 161, 147),
                                 action: SnackBarAction(
                                     label: 'Hide',
                                     textColor: Colors.black,
@@ -248,14 +266,14 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                             elevation: 0,
                             primary: isPressed == true
                                 ? Colors.white
-                                : Color(0xFF5B8A72),
+                                : const Color(0xFF5B8A72),
                           ),
                           child: Text(
                             isPressed == false ? "Want To Go" : "Remove",
                             style: TextStyle(
                               color: isPressed == false
                                   ? Colors.white
-                                  : Color(0xFF5B8A72),
+                                  : const Color(0xFF5B8A72),
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),
@@ -271,7 +289,7 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Description:",
                         style: TextStyle(
                           color: Color(0xFF2a3f34),
@@ -285,15 +303,15 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                       Text(
                         widget.trip.description,
                         textAlign: TextAlign.justify,
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFF2a3f34),
                           fontSize: 15,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 25,
                       ),
-                      Text(
+                      const Text(
                         "Q&A Section",
                         style: TextStyle(
                           color: Color(0xFF2a3f34),
@@ -302,41 +320,73 @@ class _TripDetailsPageState extends State<TripDetailsPage> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 10, bottom: 15),
+                        margin: const EdgeInsets.only(top: 10, bottom: 15),
                         width: double.infinity,
                         height: 1,
                         color: Colors.grey[300],
                       ),
 
                       // QUESTION CARD!!!!
-                      QuestionCard(
-                        asker_image:
-                            "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg",
-                        owner_image: widget.trip.owner_image!,
-                        question: "Question",
-                        answer: "Answer",
+                      Container(
+                        // width: 390,
+                        height: 300,
+                        // color: Colors.red,
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 20.0),
+                          child: ListView.builder(
+                            padding: const EdgeInsets.all(8),
+                            shrinkWrap: true,
+                            itemCount: widget.trip.questions!.length,
+                            itemBuilder: (context, index) => QuestionCard(
+                              questionId: widget.trip.questions![index].id!,
+                              trip_owner: widget.trip.owner!,
+                              asker_image: widget.trip.questions![index].image!,
+                              owner_image: widget.trip.owner_image!,
+                              question: widget.trip.questions![index].text!,
+                              answer: widget.trip.questions![index].replies!
+                                      .isNotEmpty
+                                  ? widget
+                                      .trip.questions![index].replies![0].text!
+                                  : "",
+                            ),
+                          ),
+                        ),
                       ),
-                      QuestionCard(
-                        asker_image:
-                            "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg",
-                        owner_image: widget.trip.owner_image!,
-                        question: "Question",
-                        answer: "Answer",
-                      ),
-                      QuestionCard(
-                        asker_image:
-                            "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg",
-                        owner_image: widget.trip.owner_image!,
-                        question: "Question",
-                        answer: "Answer",
-                      ),
-                      QuestionCard(
-                        asker_image:
-                            "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg",
-                        owner_image: widget.trip.owner_image!,
-                        question: "Question",
-                        answer: "Answer",
-                      ),
+                      // widget.trip.owner != user
+                      //     ? Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           CustomInputField(
+                      //             width: 300,
+                      //             controller: question,
+                      //             hintText: "Ask a Question",
+                      //             hiddenText: false,
+                      //           ),
+                      //           CustomButton(
+                      //             width: 60,
+                      //             onPressed: () async {
+                      //               await context.read<TripProvider>().askQ(
+                      //                   Question(
+                      //                       text: question.text,
+                      //                       image: context
+                      //                           .read<ProfileProvider>()
+                      //                           .profile
+                      //                           .image,
+                      //                       replies: [],
+                      //                       id: widget.trip.questions!.length +
+                      //                           1),
+                      //                   widget.trip.id!);
+                      //               // setState(() {
+                      //               //   the_answer = _answer.text;
+                      //               // });
+                      //             },
+                      //             buttonText: "Ask",
+                      //           ),
+                      //         ],
+                      //       )
+                      //     : const SizedBox(
+                      //         height: 0,
+                      //       ),
                     ],
                   ),
                 ],
