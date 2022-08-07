@@ -12,6 +12,9 @@ Trip _$TripFromJson(Map<String, dynamic> json) => Trip(
       owner: json['owner'] as String?,
       want_to:
           (json['want_to'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      questions: (json['questions'] as List<dynamic>?)
+          ?.map((e) => Question.fromJson(e as Map<String, dynamic>))
+          .toList(),
       favorite:
           (json['favorite'] as List<dynamic>?)?.map((e) => e as int).toList(),
       owner_image: json['owner_image'] as String?,

@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:frontend/models/profile.dart';
+import 'package:frontend/models/question.dart';
+import 'package:frontend/models/reply.dart';
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/providers/profile_provider.dart';
 import 'package:frontend/services/client.dart';
@@ -126,5 +128,25 @@ class TripService {
       print(error);
     }
     return favorites;
+  }
+
+  // TO Post a Question
+  Future<void> askQ({required Question question, tripId}) async {
+    try {
+      await Client.dio
+          .post('question/post?trip_id=$tripId', data: question.toJson());
+    } on DioError catch (error) {
+      print(error);
+    }
+  }
+
+  // TO Reply
+  Future<void> reply({required Reply reply, questionId}) async {
+    try {
+      await Client.dio
+          .post('question/reply?question_id=$questionId', data: reply.toJson());
+    } on DioError catch (error) {
+      print(error);
+    }
   }
 }

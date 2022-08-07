@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
     GoRoute(
       path: "/user-profile",
       builder: (context, state) => UserProfilePage(
-        user: state.extra as Profile,
+        // user: state.extra as Profile,
         id: state.extra as int,
       ),
     ), // change this later

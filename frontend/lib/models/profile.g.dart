@@ -13,16 +13,16 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) => Profile(
       birth_date: json['birth_date'] as String?,
       first_name: json['first_name'] as String?,
       last_name: json['last_name'] as String?,
+      want_to:
+          (json['want_to'] as List<dynamic>?)?.map((e) => e as int).toList(),
+      favorite:
+          (json['favorite'] as List<dynamic>?)?.map((e) => e as int).toList(),
       image: json['image'] as String?,
       bio: json['bio'] as String?,
       date_joined: json['date_joined'] as String?,
       trips: (json['trips'] as List<dynamic>?)
           ?.map((e) => Trip.fromJson(e as Map<String, dynamic>))
           .toList(),
-      want_to:
-          (json['want_to'] as List<dynamic>?)?.map((e) => e as int).toList(),
-      favorite:
-          (json['favorite'] as List<dynamic>?)?.map((e) => e as int).toList(),
     );
 
 Map<String, dynamic> _$ProfileToJson(Profile instance) => <String, dynamic>{

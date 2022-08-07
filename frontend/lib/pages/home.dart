@@ -148,10 +148,12 @@ class HomePage extends StatelessWidget {
                                               SizedBox(
                                             width: 12,
                                           ),
-                                          itemCount: (trips.trips.length),
+                                          itemCount:
+                                              (home.profile.want_to!.length),
                                           itemBuilder: (context, index) =>
                                               LatestTripCard(
-                                            trips: trips.trips[index],
+                                            trips: trips.getMyWantTO(
+                                                home.profile.want_to!)[index],
                                           ),
                                         ),
                                       )),

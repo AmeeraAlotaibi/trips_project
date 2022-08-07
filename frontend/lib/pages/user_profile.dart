@@ -8,9 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class UserProfilePage extends StatelessWidget {
-  UserProfilePage({Key? key, required this.user, required this.id})
-      : super(key: key);
-  final Profile user;
+  UserProfilePage({Key? key, required this.id}) : super(key: key);
+  // final Profile user;
   final int id;
   @override
   Widget build(BuildContext context) {
@@ -45,9 +44,9 @@ class UserProfilePage extends StatelessWidget {
                             child: CircleAvatar(
                               backgroundColor: const Color(0xFF2a3f34),
                               backgroundImage: NetworkImage(
-                                profile.profile.image == null
+                                profile.userProfile.image == null
                                     ? "https://millingtontownship.com/wp-content/uploads/2021/01/default.jpg"
-                                    : profile.profile.image.toString(),
+                                    : profile.userProfile.image.toString(),
                               ),
                             ),
                           ),
@@ -83,7 +82,7 @@ class UserProfilePage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "${profile.profile.first_name} ${profile.profile.last_name}",
+                              "${profile.userProfile.first_name} ${profile.userProfile.last_name}",
                               style: const TextStyle(
                                 fontSize: 18.5,
                                 color: Color(0xFF5F7161),
@@ -94,9 +93,9 @@ class UserProfilePage extends StatelessWidget {
                             ),
                             // GENDER
 
-                            profile.profile.gender == ""
+                            profile.userProfile.gender == ""
                                 ? const Text("")
-                                : profile.profile.gender == "female"
+                                : profile.userProfile.gender == "female"
                                     ? Icon(
                                         Icons.female,
                                         color: Colors.pink[200],
@@ -113,7 +112,7 @@ class UserProfilePage extends StatelessWidget {
                         ),
                         // @username -----------------------------------------
                         Text(
-                          "@${profile.profile.username}",
+                          "@${profile.userProfile.username}",
                           style: const TextStyle(
                             fontSize: 25,
                             color: Color(0xFF2a3f34),
@@ -143,7 +142,7 @@ class UserProfilePage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  profile.profile.birth_date.toString(),
+                                  profile.userProfile.birth_date.toString(),
                                   style: const TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF2a3f34),
@@ -167,9 +166,9 @@ class UserProfilePage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  profile.profile.trips?.length == null
+                                  profile.userProfile.trips?.length == null
                                       ? "0"
-                                      : "${profile.profile.trips?.length}",
+                                      : "${profile.userProfile.trips?.length}",
                                   style: const TextStyle(
                                     fontSize: 20,
                                     color: Color(0xFF2a3f34),
@@ -194,7 +193,7 @@ class UserProfilePage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  profile.profile.date_joined.toString(),
+                                  profile.userProfile.date_joined.toString(),
                                   style: const TextStyle(
                                     fontSize: 16,
                                     color: Color(0xFF2a3f34),
@@ -226,7 +225,7 @@ class UserProfilePage extends StatelessWidget {
                                 height: 5,
                               ),
                               Text(
-                                profile.profile.bio.toString(),
+                                profile.userProfile.bio.toString(),
                                 textAlign: TextAlign.justify,
                                 style: const TextStyle(
                                   fontSize: 15,
@@ -279,7 +278,7 @@ class UserProfilePage extends StatelessWidget {
                                       TextButton(
                                         onPressed: () {
                                           context.push("/user-lists",
-                                              extra: profile.profile.trips);
+                                              extra: profile.userProfile.trips);
                                         },
                                         child: const Text(
                                           "See all trips",
@@ -298,6 +297,9 @@ class UserProfilePage extends StatelessWidget {
                                 // TRIPS LISTS CARDS ------------------------------------------
                                 InkWell(
                                   onTap: () {
+                                    context.push("/my-want-to",
+                                        extra: profile.userProfile.want_to);
+
                                     // -------------------------------------
                                   },
                                   child: Container(
@@ -346,7 +348,8 @@ class UserProfilePage extends StatelessWidget {
                                 InkWell(
                                   onTap: () {
                                     // FAVORITES LIST
-                                    context.push("/my-favorites");
+                                    context.push("/my-favorites",
+                                        extra: profile.userProfile.favorite);
                                   },
                                   child: Container(
                                     width: 305,

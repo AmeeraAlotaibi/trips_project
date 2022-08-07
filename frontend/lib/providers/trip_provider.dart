@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/profile.dart';
+import 'package:frontend/models/question.dart';
+import 'package:frontend/models/reply.dart';
 import 'package:frontend/models/trip.dart';
 import 'package:frontend/providers/profile_provider.dart';
 
@@ -116,5 +118,24 @@ class TripProvider extends ChangeNotifier {
       trip = foundTrip;
     }
     // notifyListeners();
+  }
+
+  // add trip to a list of favorites
+  Future<void> reply(Reply reply, int questionId) async {
+    // int user = ProfileProvider().profile;
+    await TripService().reply(reply: reply, questionId: questionId);
+
+    notifyListeners();
+  }
+
+  // add trip to a list of favorites
+  Future<void> askQ(Question question, int tripId) async {
+    // int user = ProfileProvider().profile;
+    await TripService()
+        .askQ(question: Question(text: question.text), tripId: tripId);
+    Trip foundTrip = trips.firstWhere((element) => element.id == tripId);
+    foundTrip.questions!.add(question);
+
+    notifyListeners();
   }
 }
