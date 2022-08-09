@@ -111,7 +111,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   fit: BoxFit.cover,
                                 )
                               : Image.network(
-                                  profile.image!,
+                                  profile.image == null ? "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg"
+                                  :profile.image!,
                                   width: 200.0,
                                   height: 200.0,
                                   fit: BoxFit.cover,

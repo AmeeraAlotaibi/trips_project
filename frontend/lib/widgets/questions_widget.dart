@@ -76,7 +76,7 @@ class _QuestionCardState extends State<QuestionCard> {
                       width: 10,
                     ),
                     SizedBox(
-                      width: 240,
+                      width: 225,
                       child: Text(
                         widget.question,
                         maxLines: 3,

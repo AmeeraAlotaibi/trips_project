@@ -62,7 +62,9 @@ class HomePage extends StatelessWidget {
                           radius: 40,
                           backgroundColor: Color(0xFF5B8A72),
                           backgroundImage: NetworkImage(
-                            home.profile.image.toString(),
+                            home.profile.image == null 
+                            ? "https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg" 
+                            : home.profile.image.toString(),
                           ),
                         )
                       ],
